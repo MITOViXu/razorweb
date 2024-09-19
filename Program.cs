@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 namespace CS01
 {
   class Program
@@ -6,16 +6,34 @@ namespace CS01
     static void Main(string[] args)
     {
       Console.WriteLine("Xin chao C#");
-      Abc abc= new Abc();
-      
+      Abc.XinChao();
+      Console.WriteLine(Tong(2,3));
+      Console.WriteLine(Tong(2,Tong(3,5)));
     }
-
+    /// <summary>
+    /// Phuong thuc tong cua 2 so nguyen
+    /// </summary>
+    /// <param name="a">so nguyen 1</param>
+    /// <param name="b">so nguyen 2</param>
+    /// <returns>Tong a + b</returns>
+    static int Tong(int a, int b)
+    {
+      return a + b;
+    }
   }
   class Abc
   {
-    static void XinChao()
+    public static void XinChao()
     {
       Console.WriteLine("Xin chao den voi C#");
     }
+  }
+}
+
+namespace MyNameSpace
+{
+  class Abc
+  {
+
   }
 }

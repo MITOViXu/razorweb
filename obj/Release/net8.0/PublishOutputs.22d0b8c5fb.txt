@@ -1,0 +1,5 @@
+D:\ASP NET CORE\New folder (2)\razorweb\bin\Release\net8.0\publish\razorweb.exe
+D:\ASP NET CORE\New folder (2)\razorweb\bin\Release\net8.0\publish\razorweb.dll
+D:\ASP NET CORE\New folder (2)\razorweb\bin\Release\net8.0\publish\razorweb.deps.json
+D:\ASP NET CORE\New folder (2)\razorweb\bin\Release\net8.0\publish\razorweb.runtimeconfig.json
+D:\ASP NET CORE\New folder (2)\razorweb\bin\Release\net8.0\publish\razorweb.pdb
