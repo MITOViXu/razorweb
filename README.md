@@ -40,3 +40,23 @@ Console.WriteLine("Welcome to C#");
 ```
 
 ![alt text](./assets/restcolor.jpg)
+
+### Data entry 🐟
+```
+Console.Write("Nhap ho va ten: "); string hovaten = Console.ReadLine();
+Console.WriteLine("Ho va ten: {0}", hovaten);
+```
+![alt text](./assets/readline.jpg)
+
+### Convert string to another data type 👻
+```
+float a,b;
+string sinput;
+Console.WriteLine("Nhap a va b: ");
+sinput = Console.ReadLine();
+a = float.Parse(sinput);
+sinput = Console.ReadLine();
+b = Convert.ToSingle(sinput);
+Console.WriteLine("So a: {0}, b: {0}", a,b);
+```
+![alt text](./assets/convert.jpg)

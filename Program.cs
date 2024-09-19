@@ -4,14 +4,15 @@
   {
     static void Main(string[] args)
     {
-      float c;
-      c = (float)12.12;
-      Console.ForegroundColor = ConsoleColor.DarkMagenta;
-      Console.BackgroundColor = ConsoleColor.DarkGray;
-      Console.Title = "Vi du su dung Console";
-      Console.WriteLine(c);
-      Console.ResetColor();
-      Console.WriteLine("Welcome to C#");
+      float a, b;
+      string sinput;
+      Console.WriteLine("Nhap a va b: ");
+      sinput = Console.ReadLine();
+      a = float.Parse(sinput);
+      sinput = Console.ReadLine();
+      b = Convert.ToSingle(sinput);
+      Console.WriteLine("So a: {0}, b: {0}", a, b);
+      
     }
   }
 }
