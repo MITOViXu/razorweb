@@ -1,39 +1,17 @@
-﻿
-namespace CS01
+﻿namespace CS02
 {
   class Program
   {
     static void Main(string[] args)
     {
-      Console.WriteLine("Xin chao C#");
-      Abc.XinChao();
-      Console.WriteLine(Tong(2,3));
-      Console.WriteLine(Tong(2,Tong(3,5)));
+      float c;
+      c = (float)12.12;
+      Console.ForegroundColor = ConsoleColor.DarkMagenta;
+      Console.BackgroundColor = ConsoleColor.DarkGray;
+      Console.Title = "Vi du su dung Console";
+      Console.WriteLine(c);
+      Console.ResetColor();
+      Console.WriteLine("Welcome to C#");
     }
-    /// <summary>
-    /// Phuong thuc tong cua 2 so nguyen
-    /// </summary>
-    /// <param name="a">so nguyen 1</param>
-    /// <param name="b">so nguyen 2</param>
-    /// <returns>Tong a + b</returns>
-    static int Tong(int a, int b)
-    {
-      return a + b;
-    }
-  }
-  class Abc
-  {
-    public static void XinChao()
-    {
-      Console.WriteLine("Xin chao den voi C#");
-    }
-  }
-}
-
-namespace MyNameSpace
-{
-  class Abc
-  {
-
   }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ASP NET CORE\\New folder (2)\\razorweb\\razorweb.csproj": {}
+    "D:\\razorweb\\razorweb.csproj": {}
   },
   "projects": {
-    "D:\\ASP NET CORE\\New folder (2)\\razorweb\\razorweb.csproj": {
+    "D:\\razorweb\\razorweb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ASP NET CORE\\New folder (2)\\razorweb\\razorweb.csproj",
+        "projectUniqueName": "D:\\razorweb\\razorweb.csproj",
         "projectName": "razorweb",
-        "projectPath": "D:\\ASP NET CORE\\New folder (2)\\razorweb\\razorweb.csproj",
+        "projectPath": "D:\\razorweb\\razorweb.csproj",
         "packagesPath": "C:\\Users\\MINH TOAN\\.nuget\\packages\\",
-        "outputPath": "D:\\ASP NET CORE\\New folder (2)\\razorweb\\obj\\",
+        "outputPath": "D:\\razorweb\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\MINH TOAN\\AppData\\Roaming\\NuGet\\NuGet.Config",

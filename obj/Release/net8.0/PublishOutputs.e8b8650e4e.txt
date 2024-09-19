@@ -1,0 +1,5 @@
+D:\razorweb\bin\Release\net8.0\publish\razorweb.exe
+D:\razorweb\bin\Release\net8.0\publish\razorweb.dll
+D:\razorweb\bin\Release\net8.0\publish\razorweb.deps.json
+D:\razorweb\bin\Release\net8.0\publish\razorweb.runtimeconfig.json
+D:\razorweb\bin\Release\net8.0\publish\razorweb.pdb

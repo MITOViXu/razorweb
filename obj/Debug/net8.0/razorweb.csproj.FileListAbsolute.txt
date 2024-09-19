@@ -13,3 +13,18 @@ D:\ASP NET CORE\New folder (2)\razorweb\obj\Debug\net8.0\refint\razorweb.dll
 D:\ASP NET CORE\New folder (2)\razorweb\obj\Debug\net8.0\razorweb.pdb
 D:\ASP NET CORE\New folder (2)\razorweb\obj\Debug\net8.0\razorweb.genruntimeconfig.cache
 D:\ASP NET CORE\New folder (2)\razorweb\obj\Debug\net8.0\ref\razorweb.dll
+D:\razorweb\obj\Debug\net8.0\razorweb.GeneratedMSBuildEditorConfig.editorconfig
+D:\razorweb\obj\Debug\net8.0\razorweb.AssemblyInfoInputs.cache
+D:\razorweb\obj\Debug\net8.0\razorweb.AssemblyInfo.cs
+D:\razorweb\obj\Debug\net8.0\razorweb.csproj.CoreCompileInputs.cache
+D:\razorweb\obj\Debug\net8.0\razorweb.sourcelink.json
+D:\razorweb\obj\Debug\net8.0\razorweb.dll
+D:\razorweb\obj\Debug\net8.0\refint\razorweb.dll
+D:\razorweb\obj\Debug\net8.0\razorweb.pdb
+D:\razorweb\bin\Debug\net8.0\razorweb.exe
+D:\razorweb\bin\Debug\net8.0\razorweb.deps.json
+D:\razorweb\bin\Debug\net8.0\razorweb.runtimeconfig.json
+D:\razorweb\bin\Debug\net8.0\razorweb.dll
+D:\razorweb\bin\Debug\net8.0\razorweb.pdb
+D:\razorweb\obj\Debug\net8.0\razorweb.genruntimeconfig.cache
+D:\razorweb\obj\Debug\net8.0\ref\razorweb.dll
