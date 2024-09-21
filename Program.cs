@@ -1,24 +1,69 @@
-﻿using System.Text;
-
-namespace CS11
+﻿using System;
+namespace CS12
 {
   class Program
   {
+    // Enumeration type Enum
+    enum HOCLUC
+    {
+      Kem = 10,
+      TrungBinh = 11,
+      Kha = 12,
+      Gioi = 13
+    }
+
+    // Struc is pass by value, while Class is pass by Reference
+    public struct Product
+    {
+      public string name;
+      public double price;
+      public string GetInfo()
+      {
+        return $"Ten san pham: {name}, gia: {price}";
+      }
+      // constructor
+      public Product(string _name, double _price)
+      {
+        name = _name;
+        this.price = _price;
+      }
+      public string Info
+      {
+        get { return $"\nSan pham {name} duoc ban voi gia {price}"; }
+      }
+
+    }
     static void Main(string[] args)
     {
-      // working the same way but the performace will be bad
-      string hoten;
-      hoten = "Nguyen";
-      hoten += " Van2 Minh Toan";
-      hoten = hoten.Replace("Van2", "Van");
-      Console.WriteLine(hoten);
+      Product sanpham1;
+      sanpham1.name = "Iphone";
+      sanpham1.price = 1000;
 
-      //   For the best performace 
-      StringBuilder hoten2 = new StringBuilder();
-      hoten2.Append("Nguyen ");
-      hoten2.Append(" Van2 Minh Toan");
-      hoten2.Replace("Nguyen  Van2", "Nguyen Van");
-      Console.WriteLine(hoten2);
+      Product sanpham2 = new Product("Nokia", 900);
+      Console.WriteLine(sanpham1.GetInfo());
+      Console.WriteLine(sanpham2.GetInfo());
+      Console.WriteLine(sanpham1.Info);
+
+      HOCLUC hocluc;
+      hocluc = HOCLUC.Kha;
+      switch (hocluc)
+      {
+        case HOCLUC.Kem:
+          Console.WriteLine("Hoc luc kem");
+          break;
+        case HOCLUC.Gioi:
+          Console.WriteLine("Hoc luc gioi");
+          break;
+        case HOCLUC.TrungBinh:
+          Console.WriteLine("Hoc luc trung binh");
+          break;
+        case HOCLUC.Kha:
+          Console.WriteLine("Hoc luc kha");
+          break;
+      }
+      int so = (int)hocluc;
+      Console.WriteLine(so);
     }
+
   }
 }
