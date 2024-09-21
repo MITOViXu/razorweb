@@ -1,69 +1,80 @@
 ﻿using System;
-namespace CS12
+namespace CS13
 {
   class Program
   {
-    // Enumeration type Enum
-    enum HOCLUC
+    // Inheritance
+    /*
+      A inherits B 
+      A - basic class, father class
+      B - child class
+
+      class B : A {}
+    */
+
+    class Animal
     {
-      Kem = 10,
-      TrungBinh = 11,
-      Kha = 12,
-      Gioi = 13
+      public int Legs { get; set; }
+      public float Weight { get; set; }
+      public Animal(){
+        Console.WriteLine("Khoi tao Animal");
+      }
+      public Animal(string abc){
+        Console.WriteLine("Khoi tao Animal (2)");
+      }
+      public void ShowLegs()
+      {
+      
+        Console.WriteLine($"Legs : {Legs}");
+      }
     }
 
-    // Struc is pass by value, while Class is pass by Reference
-    public struct Product
+    class Cat : Animal
     {
-      public string name;
-      public double price;
-      public string GetInfo()
+      public string Food;
+      public Cat() : base()
+      
       {
-        return $"Ten san pham: {name}, gia: {price}";
+        Console.WriteLine("Khoi tao Cat");
+        this.Legs = 4;
+        this.Food = "Mouse";
       }
-      // constructor
-      public Product(string _name, double _price)
+      public Cat(string abc) : base(abc)
+      
       {
-        name = _name;
-        this.price = _price;
+        Console.WriteLine($"Khoi tao Cat (2) : {abc}");
+        this.Legs = 4;
+        this.Food = "Mouse";
       }
-      public string Info
+      public void Eat()
       {
-        get { return $"\nSan pham {name} duoc ban voi gia {price}"; }
+        Console.WriteLine(Food);
       }
-
+      public new void ShowLegs(){
+        Console.WriteLine($@"Loai meo co so chan la : {Legs}");
+      }
+      public void ShowInfo(){
+        // execute base class is Animal
+        base.ShowLegs();
+        ShowLegs();
+      }
     }
+
+    static public void Space()
+    {
+      Console.WriteLine("");
+      Console.WriteLine("");
+    }
+
     static void Main(string[] args)
     {
-      Product sanpham1;
-      sanpham1.name = "Iphone";
-      sanpham1.price = 1000;
+      Space();
 
-      Product sanpham2 = new Product("Nokia", 900);
-      Console.WriteLine(sanpham1.GetInfo());
-      Console.WriteLine(sanpham2.GetInfo());
-      Console.WriteLine(sanpham1.Info);
+      Cat c = new Cat("MEo");
+      Console.WriteLine(c.Food);
+      c.ShowInfo();
 
-      HOCLUC hocluc;
-      hocluc = HOCLUC.Kha;
-      switch (hocluc)
-      {
-        case HOCLUC.Kem:
-          Console.WriteLine("Hoc luc kem");
-          break;
-        case HOCLUC.Gioi:
-          Console.WriteLine("Hoc luc gioi");
-          break;
-        case HOCLUC.TrungBinh:
-          Console.WriteLine("Hoc luc trung binh");
-          break;
-        case HOCLUC.Kha:
-          Console.WriteLine("Hoc luc kha");
-          break;
-      }
-      int so = (int)hocluc;
-      Console.WriteLine(so);
+      Space();
     }
-
   }
 }
