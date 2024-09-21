@@ -1,4 +1,5 @@
-# Object-oriented programming in C# 🐨🐽
+# StringBuilder and string in C# 🐨🐽
+
 ```
 using System.Text;
 
@@ -15,7 +16,7 @@ namespace CS11
       hoten = hoten.Replace("Van2", "Van");
       Console.WriteLine(hoten);
 
-      //   For the best performace 
+      //   For the best performace
       StringBuilder hoten2 = new StringBuilder();
       hoten2.Append("Nguyen ");
       hoten2.Append(" Van2 Minh Toan");
