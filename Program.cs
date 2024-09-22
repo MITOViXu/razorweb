@@ -1,103 +1,73 @@
 ﻿using static System.Console;
-using static System.Math;
-namespace CS19
+using static System.ConsoleColor;
+
+// delegate (Type) variable = method 
+
+namespace CS20
 {
-  // virtual method
-  // Defined in basic class and can be overwritten by inherit class
-
-  // abstract can not be used to create object classes
-  abstract class Product
+  class Program
   {
-    protected double Price { set; get; }
-    public virtual void ProductInfo()
+    static void Info(string s)
     {
-      WriteLine($"Gia san pham {Price}");
+      ForegroundColor = Green;
+      WriteLine(s);
+      ResetColor();
     }
-    public abstract void InfoProduct();
+    static void Warning(string s)
+    {
+      ForegroundColor = Red;
+      WriteLine(s);
+      ResetColor();
+    }
+    public delegate void ShowLog(string message);
+    static void Tong(int a, int b, ShowLog log)
+    {
+      int kq = a + b;
+      log?.Invoke($"Tong la: {kq}");
+    }
+    static void Main(string[] args)
+    {
+      ShowLog log = null;
+      // log = Info;
+      if (log != null) log("Xin chao");
+      log?.Invoke("Xin chao Abc");
 
-    public void Test() => ProductInfo();
-  }
-  // Inherited class base on basic class 
-  class Iphone : Product
-  {
-    public Iphone() => Price = 500;
-    // override - method overloading
-    public override void ProductInfo()
-    {
-      WriteLine("Dien thoai iphone");
-      // if we want to call method is defined in basic class
-      base.ProductInfo();
-    }
-    // implement inherited abstract member 'Product.InfoProduct()'
-    public override void InfoProduct()
-    {
-      WriteLine("Iphone san pham moi");
-    }
-  }
+      log = Info;
 
-  // interface - not be used to declare the structure of class, but not supposed to create object, used to be basic class for inheritant
-  interface IHinhHoc
-  {
-    public double TinhChuVi();
-    public double TinhDienTich();
+      if (log != null) log("Xin chao");
+      log?.Invoke("Xin chao Abc");
 
-  }
-  class HinhChuNhat : IHinhHoc
-  {
-    public double a { set; get; }
-    public double b { set; get; }
-    public HinhChuNhat(double a, double b)
-    {
-      this.a = a;
-      this.b = b;
-    }
-
-    public double TinhChuVi()
-    {
-      return 2 * (this.a + this.b);
-    }
-
-    public double TinhDienTich()
-    {
-      return this.a * this.b;
-    }
-  }
-  class HinhTron : IHinhHoc
-  {
-    public double r { set; get; }
-    public HinhTron(double r) => this.r = r;
-    public double TinhChuVi()
-    {
-      return 2 * r * PI;
-    }
-
-    public double TinhDienTich()
-    {
-      return r * r * PI;
-    }
-  }
-  public class Program
-  {
-    public static void Main(string[] args)
-    {
-      Iphone i = new Iphone();
-      i.Test();
+      log = Warning;
+      log?.Invoke("Xin chao warning");
       WriteLine();
-      Iphone product = new Iphone();
-      product.InfoProduct();
+      ShowLog log2 = null;
+
+      log2 += Info;
+      log2?.Invoke("Xin chao log2");
+      log2 += Warning;
+      log2?.Invoke("Xin chao log2 Warning");
+
       WriteLine();
-      HinhChuNhat h = new HinhChuNhat(5, 6);
-      WriteLine($"Chu vi hinh chu nhat: {h.TinhChuVi()}");
-      WriteLine($"Dien tich hinh chu nhat: {h.TinhDienTich()}");
+
+      // Action, Func: delegate - generic 
+      Action action; // ~ delegate void KIEU();
+      Action<string, int> action1; // ~ delegate void KIEU(string s, int i);
+      Action<string> action2; // ~ delegate void KIEU(string s)
+      action2 = Warning;
       WriteLine();
-      IHinhHoc hinhvuong = new HinhChuNhat(5, 5);
-      WriteLine($"Chu vi hinh vuong: {hinhvuong.TinhChuVi()}");
-      WriteLine($"Dien tich hinh vuong: {hinhvuong.TinhDienTich()}");
+      action2.Invoke("action2");
+      action2 += Info;
+      action2.Invoke("action2 after add Info");
       WriteLine();
-      IHinhHoc hinhtron = new HinhTron(2);
-      WriteLine($"Chu vi hinh tron: {hinhtron.TinhChuVi()}");
-      WriteLine($"Dien tich hinh tron: {hinhtron.TinhDienTich()}");
-      WriteLine();
+
+      // Using Func is similar to Action but need to have a return value
+      // return int value but have no parameter
+      Func<int> f1; // ~ delegate int KIEU();
+
+      // reiceive string, double value and return string value
+      Func<string, double, string> f2; // ~ delegate string KIEU(string a, double s);
+      Tong(4, 5, Info);
+
     }
   }
 }
