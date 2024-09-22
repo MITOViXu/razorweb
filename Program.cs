@@ -1,6 +1,4 @@
-# Generic: method and class 😴😫🐴
-```
-using static System.Console;
+﻿using static System.Console;
 namespace CS16
 {
   class Program
@@ -63,4 +61,3 @@ namespace CS16
     }
   }
 }
-```
