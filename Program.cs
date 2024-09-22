@@ -1,63 +1,121 @@
-﻿using static System.Console;
-namespace CS16
+﻿using System.Formats.Tar;
+using static System.Console;
+namespace CS17
 {
   class Program
   {
-    class Product<A>
+    // Anonymous 
+    // Object - attribute - READ ONLY
+    // new {attrname1 = value1, atrname2 = value2}
+
+
+    class Sinhvien
     {
-      A ID;
-      public void setID(A _id)
+      public string HoTen { get; set; }
+      public int Namsinh { get; set; }
+      public string Noisinh { get; set; }
+      public Sinhvien(string hoTen, int namsinh, string noisinh)
       {
-        this.ID = _id;
+        HoTen = hoTen;
+        Namsinh = namsinh;
+        Noisinh = noisinh;
       }
-      public void PrintInf()
+      public Sinhvien()
       {
-        WriteLine($"ID = {ID}");
+        WriteLine("Hello cac ban");
       }
     }
-    static void Swap<T>(ref T x, ref T y)
+    
+    // Dynamic
+    class Student
     {
-      T temp;
-      temp = x;
-      x = y;
-      y = temp;
+      public string Name { get; set; }
+      public void Hello()
+      {
+        WriteLine("Hello cac ban: " + Name);
+      }
     }
+    static void PrintInfo(dynamic obj)
+    {
+      obj.Name = "Hallo";
+      obj.Hello();
+    }
+
     static void Main(string[] args)
     {
-      string a = "Abc", b = "Xyz";
-      WriteLine($@"Before   swap {a} {b}");
-      Swap<string>(ref a, ref b);
-      WriteLine($@"After    swap {a} {b}");
-
-      Product<string> sanpham1 = new Product<string>();
-      sanpham1.setID("sanpham1");
-      sanpham1.PrintInf();
-
-      Product<int> sanpham2 = new Product<int>();
-      sanpham2.setID(123);
-      sanpham2.PrintInf();
-
-      // represent lists of elements
-      List<int> list1 = new List<int>();
-      List<string> list2 = new List<string>();
-      list1.Add(1);
-      list1.Add(2);
-      list1.Add(3);
-      list2.Add("Hello");
-      list2.Add("Any");
-      list2.Add("One");
-      foreach (int i in list1)
+      var sanpham = new
       {
-        WriteLine(i);
-      }
-      foreach (string i in list2)
+        Ten = "Iphone 8",
+        Gia = 1000,
+        NamSx = 2008
+      };
+      WriteLine("");
+      WriteLine(sanpham.Ten);
+      WriteLine(sanpham.Gia);
+      WriteLine("");
+
+      List<Sinhvien> cacsinhvien = new List<Sinhvien>(){
+        new Sinhvien("Nguyen van A", 1990, "Chau Doc"),
+        new Sinhvien("Nguyen van B", 1991, "Tan Chau"),
+        new Sinhvien("Nguyen van C", 1992, "Vinh Xuong"),
+        new Sinhvien("Nguyen van D", 1993, "Phu Loc"),
+        new Sinhvien("Nguyen van F", 1994, "Vinh Hoa"),
+        new Sinhvien("Nguyen van G", 1995, "Long An"),
+        new Sinhvien("Nguyen van H", 1996, "Tan An"),
+      };
+      List<Sinhvien> cacsinhvien2 = new List<Sinhvien>(){
+        new Sinhvien(){HoTen ="Dan", Namsinh=1990, Noisinh="Binh Nhuong"},
+        new Sinhvien(){HoTen ="Meo", Namsinh=1991, Noisinh="Binh Duong"},
+        new Sinhvien(){HoTen ="Thin", Namsinh=1992, Noisinh="Binh Dinh"},
+      };
+      WriteLine("");
+      foreach (var c in cacsinhvien)
       {
-        WriteLine(i);
+        Write(c.HoTen + " ");
+        Write(c.Namsinh + " ");
+        Write(c.Noisinh + " ");
+        WriteLine("");
       }
-      // LIFO
-      Stack<int> stack = new Stack<int>();
-      // FIFO
-      Queue<int> q = new Queue<int>();
+      WriteLine("");
+      foreach (var c in cacsinhvien2)
+      {
+        Write(c.HoTen + " ");
+        Write(c.Namsinh + " ");
+        Write(c.Noisinh + " ");
+        WriteLine("");
+      }
+      WriteLine("");
+      var ketqua = from sv in cacsinhvien where sv.HoTen == "Nguyen van A" select sv;
+      foreach (var k in ketqua)
+      {
+        WriteLine("");
+        WriteLine(k.HoTen + " " + k.Namsinh + " " + k.Noisinh);
+      }
+      WriteLine("");
+
+      var ketqua2 = from sv in cacsinhvien
+                    where (sv.HoTen.Contains("Nguyen van") && sv.Noisinh.Contains("Tan") && sv.Namsinh <= 2000)
+                    select new
+                    {
+                      ten = sv.HoTen,
+                      ns = sv.Noisinh,
+                      nam = sv.Namsinh
+                    };
+
+      WriteLine("Second Linq");
+
+      foreach (var k in ketqua2)
+      {
+        WriteLine(k.ten + " " + k.nam + " " + k.ns);
+      }
+
+      WriteLine("");
+
+      Student student1 = new Student();
+
+      PrintInfo(student1);
+
+      WriteLine("");
     }
   }
 }
