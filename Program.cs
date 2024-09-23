@@ -1,73 +1,83 @@
 ﻿using static System.Console;
 using static System.ConsoleColor;
-
-// delegate (Type) variable = method 
-
-namespace CS20
+using static System.Math;
+namespace CS21
 {
+  /*
+    Lambda - anonymous function 
+      1)
+        (int a, int b) => methods;
+      2)
+        (parameter) => {
+          expression;
+          return expression;
+        }
+
+  */
   class Program
   {
-    static void Info(string s)
-    {
-      ForegroundColor = Green;
-      WriteLine(s);
-      ResetColor();
-    }
-    static void Warning(string s)
-    {
-      ForegroundColor = Red;
-      WriteLine(s);
-      ResetColor();
-    }
-    public delegate void ShowLog(string message);
-    static void Tong(int a, int b, ShowLog log)
-    {
-      int kq = a + b;
-      log?.Invoke($"Tong la: {kq}");
-    }
     static void Main(string[] args)
     {
-      ShowLog log = null;
-      // log = Info;
-      if (log != null) log("Xin chao");
-      log?.Invoke("Xin chao Abc");
-
-      log = Info;
-
-      if (log != null) log("Xin chao");
-      log?.Invoke("Xin chao Abc");
-
-      log = Warning;
-      log?.Invoke("Xin chao warning");
+      // lambda using for delegate
+      Action<string> thongbao;
+      thongbao = (string s) => WriteLine(s);
       WriteLine();
-      ShowLog log2 = null;
-
-      log2 += Info;
-      log2?.Invoke("Xin chao log2");
-      log2 += Warning;
-      log2?.Invoke("Xin chao log2 Warning");
-
+      thongbao("Hello anh em xa doan nha");
+      thongbao.Invoke("Xin chao anh em xa nha nha");
       WriteLine();
 
-      // Action, Func: delegate - generic 
-      Action action; // ~ delegate void KIEU();
-      Action<string, int> action1; // ~ delegate void KIEU(string s, int i);
-      Action<string> action2; // ~ delegate void KIEU(string s)
-      action2 = Warning;
+      // Another way 
+      Action thongbao2;
       WriteLine();
-      action2.Invoke("action2");
-      action2 += Info;
-      action2.Invoke("action2 after add Info");
+      thongbao2 = () => WriteLine("Cach thong bao thu hai");
+      thongbao2();
+      thongbao2.Invoke();
       WriteLine();
 
-      // Using Func is similar to Action but need to have a return value
-      // return int value but have no parameter
-      Func<int> f1; // ~ delegate int KIEU();
+      WriteLine();
+      Action welCome;
+      welCome = () => WriteLine("Without argument");
+      welCome();
+      WriteLine();
 
-      // reiceive string, double value and return string value
-      Func<string, double, string> f2; // ~ delegate string KIEU(string a, double s);
-      Tong(4, 5, Info);
+      WriteLine();
+      Action<string> welCome2;
+      welCome2 = s => WriteLine($"With {s} argument");
+      welCome2("String");
+      WriteLine();
 
+      WriteLine();
+      Action<string, string> welCome3;
+      welCome3 = (s1, s2) =>
+      {
+        ForegroundColor = Green;
+        WriteLine($"Welcome {s1} and {s2}");
+        ResetColor();
+      };
+      welCome3("Bob", "Alice");
+      WriteLine();
+
+      // delegate with return value
+      Func<int, int, int> sum;
+      sum = (num1, num2) =>
+      {
+        return num1 + num2;
+      };
+      ForegroundColor = Blue;
+      WriteLine("Total is : " + sum(1, 2));
+      ResetColor();
+      WriteLine();
+
+      // Using lambda by .NET library
+      int[] mang = [1, 2, 3, 4, 5, 6, 7, 8];
+      var kq = mang.Select(x => x * 2);
+      foreach (var k in kq)
+      {
+        Write(k + " ");
+      }
+
+      WriteLine();
+      WriteLine();
     }
   }
 }
