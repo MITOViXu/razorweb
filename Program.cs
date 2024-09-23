@@ -1,83 +1,94 @@
 ﻿using static System.Console;
 using static System.ConsoleColor;
 using static System.Math;
-namespace CS21
+namespace CS22
 {
   /*
-    Lambda - anonymous function 
-      1)
-        (int a, int b) => methods;
-      2)
-        (parameter) => {
-          expression;
-          return expression;
-        }
-
+    publisher - event broadcast
+    subscriber - event receive
   */
+  // publisher 
+  public delegate void SuKienNhapSo(int X);
+
+  // EVENT
+
+  class Dulieunhap : EventArgs
+  {
+    public int data { get; set; }
+    public Dulieunhap(int data) => this.data = data;
+  }
+  class UserInput
+  {
+    public event EventHandler sukiennhapso2; // ~ delegate coi KIEU(object? sender, EventArgs arrgs) 
+    public event SuKienNhapSo suKienNhapSo;
+    public void Input()
+    {
+      do
+      {
+        string s = ReadLine();
+        int i = Int32.Parse(s);
+        // suKienNhapSo?.Invoke(i);
+        sukiennhapso2.Invoke(this, new Dulieunhap(i));
+      } while (true);
+    }
+  }
+  class Square
+  {
+    public void Sub(UserInput input)
+    {
+      input.sukiennhapso2 += Square2;
+    }
+    public void Square2(object sender, EventArgs args)
+    {
+      Dulieunhap dulieunhap = (Dulieunhap)args;
+      int i = dulieunhap.data;
+      WriteLine($"Binh phuong cua {i} la {i * i}");
+    }
+  }
+  class SquareRoot
+  {
+    public void Sub(UserInput input)
+    {
+      input.sukiennhapso2 += Square;
+    }
+    public void Square(object sender, EventArgs args)
+    {
+      Dulieunhap dulieunhap = (Dulieunhap)args;
+      int i = dulieunhap.data;
+      WriteLine($"Can bac 2 cua {i} la {Sqrt(i)}");
+    }
+  }
   class Program
   {
     static void Main(string[] args)
     {
-      // lambda using for delegate
-      Action<string> thongbao;
-      thongbao = (string s) => WriteLine(s);
-      WriteLine();
-      thongbao("Hello anh em xa doan nha");
-      thongbao.Invoke("Xin chao anh em xa nha nha");
-      WriteLine();
-
-      // Another way 
-      Action thongbao2;
-      WriteLine();
-      thongbao2 = () => WriteLine("Cach thong bao thu hai");
-      thongbao2();
-      thongbao2.Invoke();
-      WriteLine();
-
-      WriteLine();
-      Action welCome;
-      welCome = () => WriteLine("Without argument");
-      welCome();
-      WriteLine();
-
-      WriteLine();
-      Action<string> welCome2;
-      welCome2 = s => WriteLine($"With {s} argument");
-      welCome2("String");
-      WriteLine();
-
-      WriteLine();
-      Action<string, string> welCome3;
-      welCome3 = (s1, s2) =>
+      CancelKeyPress += (sender, e) =>
       {
-        ForegroundColor = Green;
-        WriteLine($"Welcome {s1} and {s2}");
-        ResetColor();
+        WriteLine("Thoat ung dung");
       };
-      welCome3("Bob", "Alice");
-      WriteLine();
+      // publisher
+      UserInput userInput = new UserInput();
 
-      // delegate with return value
-      Func<int, int, int> sum;
-      sum = (num1, num2) =>
+
+      // lambda
+      userInput.sukiennhapso2 += (sender, e) =>
       {
-        return num1 + num2;
+        Dulieunhap dulieunhap = (Dulieunhap)e;
+        WriteLine("Ban vua nhap so : " + dulieunhap.data);
       };
-      ForegroundColor = Blue;
-      WriteLine("Total is : " + sum(1, 2));
-      ResetColor();
-      WriteLine();
 
-      // Using lambda by .NET library
-      int[] mang = [1, 2, 3, 4, 5, 6, 7, 8];
-      var kq = mang.Select(x => x * 2);
-      foreach (var k in kq)
-      {
-        Write(k + " ");
-      }
+      // subcriber
+      SquareRoot squareRoot = new SquareRoot();
+      squareRoot.Sub(userInput);
 
-      WriteLine();
-      WriteLine();
+
+      Square binhphuong = new Square();
+      binhphuong.Sub(userInput);
+      userInput.Input();
+
+
     }
   }
 }
+
+
