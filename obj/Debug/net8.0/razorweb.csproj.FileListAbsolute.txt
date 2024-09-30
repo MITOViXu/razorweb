@@ -3,11 +3,16 @@ D:\razorweb\bin\Debug\net8.0\razorweb.deps.json
 D:\razorweb\bin\Debug\net8.0\razorweb.runtimeconfig.json
 D:\razorweb\bin\Debug\net8.0\razorweb.dll
 D:\razorweb\bin\Debug\net8.0\razorweb.pdb
+D:\razorweb\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\razorweb\bin\Debug\net8.0\Utils.dll
+D:\razorweb\bin\Debug\net8.0\Utils.pdb
+D:\razorweb\obj\Debug\net8.0\razorweb.csproj.AssemblyReference.cache
 D:\razorweb\obj\Debug\net8.0\razorweb.GeneratedMSBuildEditorConfig.editorconfig
 D:\razorweb\obj\Debug\net8.0\razorweb.AssemblyInfoInputs.cache
 D:\razorweb\obj\Debug\net8.0\razorweb.AssemblyInfo.cs
 D:\razorweb\obj\Debug\net8.0\razorweb.csproj.CoreCompileInputs.cache
 D:\razorweb\obj\Debug\net8.0\razorweb.sourcelink.json
+D:\razorweb\obj\Debug\net8.0\razorweb.csproj.CopyComplete
 D:\razorweb\obj\Debug\net8.0\razorweb.dll
 D:\razorweb\obj\Debug\net8.0\refint\razorweb.dll
 D:\razorweb\obj\Debug\net8.0\razorweb.pdb
