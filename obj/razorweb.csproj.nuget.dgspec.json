@@ -28,8 +28,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Utils\\Utils.csproj": {
-                "projectPath": "D:\\Utils\\Utils.csproj"
+              "d:\\Utils\\Utils.csproj": {
+                "projectPath": "d:\\Utils\\Utils.csproj"
               }
             }
           }
@@ -69,14 +69,14 @@
         }
       }
     },
-    "D:\\Utils\\Utils.csproj": {
+    "d:\\Utils\\Utils.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Utils\\Utils.csproj",
+        "projectUniqueName": "d:\\Utils\\Utils.csproj",
         "projectName": "Mtoan.Utils",
-        "projectPath": "D:\\Utils\\Utils.csproj",
+        "projectPath": "d:\\Utils\\Utils.csproj",
         "packagesPath": "C:\\Users\\MINH TOAN\\.nuget\\packages\\",
-        "outputPath": "D:\\Utils\\obj\\",
+        "outputPath": "d:\\Utils\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\MINH TOAN\\AppData\\Roaming\\NuGet\\NuGet.Config",

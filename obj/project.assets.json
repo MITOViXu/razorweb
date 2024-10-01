@@ -97,8 +97,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Utils\\Utils.csproj": {
-              "projectPath": "D:\\Utils\\Utils.csproj"
+            "d:\\Utils\\Utils.csproj": {
+              "projectPath": "d:\\Utils\\Utils.csproj"
             }
           }
         }
