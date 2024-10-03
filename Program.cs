@@ -1,82 +1,111 @@
-﻿using System.Text;
-using Newtonsoft.Json;
-using static System.Console;
-using static System.ConsoleColor;
-using static System.Math;
-using Mtoan.Utils;
-
-namespace CS29
+﻿using static System.Console;
+using System.IO;
+namespace CS32
 {
 
-  class Program
+  //  Attribute
+  // [AttributeName(thamso)]
+
+  /*
+    Description
+    - Detail info
+  */
+
+  [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Property)] // Describe the place that is attribute using for
+  class MotaAttribute : Attribute
   {
-    // dotnet add package Newtonsoft.Json --version 13.0.3
-    // dotnet add package packageName
-
-    // Use this when we downloading any packages and have an error
-    // dotnet restore
-
-    // dotnet add projectname.csproj library.csproj
-    // dotnet add D:\razorweb\razorweb.csproj reference D:\razorweb\Utils\Utils.csproj
-
-    class Product
+    public string thongtin { get; set; }
+    public MotaAttribute(string thongtin)
     {
-      public string Name { get; set; }
-      public DateTime Expiry { get; set; }
-      public string[] Sizes { get; set; }
+      this.thongtin = thongtin;
     }
-    class Movie
+  }
+  [Mota("Lop chua thong tin ve user tren he thong")]
+  class User
+  {
+    [Mota("Ten nguoi dung")]
+    public string Name { get; set; }
+    [Mota("Tuoi nguoi dung")]
+    public int Age { get; set; }
+    [Mota("So dien thoai")]
+    public string PhoneNumber { get; set; }
+    [Mota("Email nguoi dung")]
+    public string Email { get; set; }
+    public User(string name, int age, string phoneNumber, string email)
     {
-      public string Name { get; set; }
-      public string[] Genres { get; set; }
-      public DateTime ReleaseDate { get; set; }
-
+      Name = name;
+      Age = age;
+      PhoneNumber = phoneNumber;
+      Email = email;
     }
+    public User()
+    {
+      Name = "";
+      Age = 0;
+      PhoneNumber = "";
+      Email = "";
+    }
+    [Obsolete("Phuong thuc nay da duoc su dung ")]
+    public void PrintInfo() => WriteLine(Name);
+  }
+  public class Program
+  {
+    // Type -> class, struct, ... int, bool
+    // Attribute
+    // Reflection : Information about data type, time execute
     static void Main(string[] args)
     {
-      OutputEncoding = Encoding.UTF8;
-      Product product = new Product();
-      product.Name = "Apple";
-      product.Expiry = new DateTime(2008, 12, 28);
-      product.Sizes = new string[] { "Small" };
 
-      string json = JsonConvert.SerializeObject(product);
-      // {
-      //   "Name": "Apple",
-      //   "Expiry": "2008-12-28T00:00:00",
-      //   "Sizes": [
-      //     "Small"
-      //   ]
-      // }
-      string json2 = @"{
-                        'Name': 'Bad Boys',
-                        'ReleaseDate': '1995-4-7T00:00:00',
-                        'Genres': [
-                          'Action',
-                          'Comedy'
-                        ]
-                      }";
-      Movie m = JsonConvert.DeserializeObject<Movie>(json2);
-      Product product2 = JsonConvert.DeserializeObject<Product>(json);
-      string name = m.Name;
+      // INTRODUCTION
+      int a = 1;
+      Type t1 = typeof(int);
       WriteLine();
-      WriteLine(json);
+      WriteLine(a.GetType().FullName);
       WriteLine();
-      WriteLine("Name get from json convert: " + name);
+      int[] b = { 1, 2, 3, 4 };
+      Type check = b.GetType();
+      WriteLine("Kieu du lieu: " + check.FullName);
       WriteLine();
-      Write("Product after get from json convert 2: " + product2.Name + " : " + product2.Expiry.ToString("") + " : ");
-      foreach (var i in product.Sizes)
+      WriteLine("--------Cac thuoc tinh: ");
+      check.GetProperties().ToList().ForEach((System.Reflection.PropertyInfo p) => WriteLine(p.Name));
+      WriteLine("--------Cac truong du lieu: ");
+      check.GetFields().ToList().ForEach((System.Reflection.FieldInfo p) => WriteLine(p.Name));
+      WriteLine("KHONG CO");
+      WriteLine();
+
+
+      // PRACTICING
+      WriteLine("--------Cac truong du lieu User: ");
+      User user = new User("Mtoan", 21, "0947566433", "mtoan@gmail.com");
+      var properties = user.GetType().GetProperties();
+      foreach (var p in properties)
       {
-        Write("" + i.ToString());
+        var name = p.Name;
+        var value = p.GetValue(user);
+
+        // We know the properties's name and the value
+        WriteLine($@"{name}: {value}");
+      }
+      WriteLine();
+      WriteLine();
+      WriteLine("--------Cac truong du lieu User theo attribute: ");
+      var properties2 = user.GetType().GetProperties();
+      foreach (var p in properties2)
+      {
+        foreach (var i in p.GetCustomAttributes(false))
+        {
+          MotaAttribute mota = i as MotaAttribute;
+          if (mota != null)
+          {
+
+            WriteLine($"{p.Name.PadRight(20)} - {mota.thongtin.PadRight(20)}:  {p.GetValue(user)?.ToString().PadRight(20)}");
+          }
+        }
       }
       WriteLine();
       WriteLine();
 
-      double a = 09001509;
-      var kq = CovertMoneyToText.NumberToText(a);
-      WriteLine("Final convert: "+kq);
-      WriteLine(kq);
-      WriteLine();
+
     }
   }
 }

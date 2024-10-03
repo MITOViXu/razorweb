@@ -1,10 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fbR9ZopGXLtVNp3tnv31pUhaXLyJfKREgwWZmVPb20FrNWzMvTZmFoBcqDxXdlXlu1PMOT8nVZheX3mzttVYMQ==",
+  "dgSpecHash": "dMzsjo6F9GL0ggjTlRqgS3pymofsXkIHyF71kGgNo649fedh90AabAsjvMY0jI3NOmFzVSdZHfr4LoO79Xn2Sw==",
   "success": true,
   "projectFilePath": "D:\\razorweb\\razorweb.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\MINH TOAN\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }
