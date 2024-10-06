@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "dMzsjo6F9GL0ggjTlRqgS3pymofsXkIHyF71kGgNo649fedh90AabAsjvMY0jI3NOmFzVSdZHfr4LoO79Xn2Sw==",
+  "dgSpecHash": "952hd5kfir7FDI3NecVU+lXGpD4ADcm//XQZm/67FPfVWesyv7IWHtILLc6QMyXS9RopN2RO0LQIcqs+9yvoIA==",
   "success": true,
   "projectFilePath": "D:\\razorweb\\razorweb.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\MINH TOAN\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
+    "C:\\Users\\MINH TOAN\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

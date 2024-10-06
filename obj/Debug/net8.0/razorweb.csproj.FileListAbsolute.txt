@@ -13,3 +13,7 @@ D:\razorweb\obj\Debug\net8.0\refint\razorweb.dll
 D:\razorweb\obj\Debug\net8.0\razorweb.pdb
 D:\razorweb\obj\Debug\net8.0\razorweb.genruntimeconfig.cache
 D:\razorweb\obj\Debug\net8.0\ref\razorweb.dll
+D:\razorweb\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+D:\razorweb\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\razorweb\obj\Debug\net8.0\razorweb.csproj.AssemblyReference.cache
+D:\razorweb\obj\Debug\net8.0\razorweb.csproj.CopyComplete

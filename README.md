@@ -53,3 +53,10 @@ namespace CS33
 }
 ```
 ![alt text](/assets/inverse.jpg)
+
+## DI 
+Install package
+```
+dotnet add package Microsoft.Extensions.DependencyInjection
+```
+
