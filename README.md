@@ -2,7 +2,7 @@
 
 ## uri and url
 
-```
+```cs
 string url = "https://phimmoichill.com/xem/deadpool-va-wolverine-a1-tap-full-pm118754";
 var uri = new Uri(url);
 var uriType = typeof(Uri);
