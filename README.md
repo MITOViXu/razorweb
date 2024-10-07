@@ -1,6 +1,6 @@
 # Queue and Stack 🎇🎆🎟🎞🛒🎭
 
-```
+```cs
 using static System.Console;
 using static System.ConsoleColor;
 using static System.Math;
