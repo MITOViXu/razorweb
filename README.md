@@ -1,6 +1,6 @@
 # Event, create event with delegate and EventHandler 👀🦿🦾🎆🧨
 
-```
+```cs
 using static System.Console;
 using static System.ConsoleColor;
 using static System.Math;
