@@ -4,7 +4,7 @@
 
 ### Create folder name Utils and run following commands
 
-```cs
+```bash
 mkdir Utils
 dotnet new classlib
 ```
@@ -13,7 +13,7 @@ dotnet new classlib
 
 Utils\MyLib.cs
 
-```
+```cs
 namespace Mtoan.Utils
 {
 
@@ -117,7 +117,7 @@ namespace Mtoan.Utils
 
 MyLib.csproj
 
-```
+```cs
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
@@ -134,7 +134,7 @@ MyLib.csproj
 
 Program.cs
 
-```
+```cs
 using System.Text;
 using Newtonsoft.Json;
 using static System.Console;
@@ -221,7 +221,7 @@ namespace CS29
 
 razorweb.csproj
 
-```
+```cs
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
