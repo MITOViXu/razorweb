@@ -1,6 +1,6 @@
 # static method, data read only, overloading operator and indexer in .NET 🎇🎆🎟🎞🛒🎭
 
-```
+```cs
 using static System.Console;
 using static System.ConsoleColor;
 using static System.Math;
