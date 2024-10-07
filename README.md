@@ -1,62 +1,46 @@
-# Dependencies injection and ServiceCollection 🎇🎆🎟🎞🛒🎭
+# Networking part 1: HttpClient
 
-## Inverse dependency 🥽🥼🕶👓
+## uri and url
 
 ```
-using static System.Console;
-using System.IO;
-namespace CS33
+string url = "https://phimmoichill.com/xem/deadpool-va-wolverine-a1-tap-full-pm118754";
+var uri = new Uri(url);
+var uriType = typeof(Uri);
+uriType.GetProperties().ToList().ForEach(p =>
 {
-
-  // Depency Injection
-  // Inverse Dependency
-  class ClassC
-  {
-    public void ActionC() => Console.WriteLine("Action in ClassC");
-  }
-
-  class ClassB
-  {
-    // Phụ thuộc của ClassB là ClassC
-    ClassC c_dependency;
-
-    public ClassB(ClassC classc) => c_dependency = classc;
-    public void ActionB()
-    {
-      Console.WriteLine("Action in ClassB");
-      c_dependency.ActionC();
-    }
-  }
-
-  class ClassA
-  {
-    // Phụ thuộc của ClassA là ClassB
-    ClassB b_dependency;
-
-    public ClassA(ClassB classb) => b_dependency = classb;
-    public void ActionA()
-    {
-      Console.WriteLine("Action in ClassA");
-      b_dependency.ActionB();
-    }
-  }
-  public static class Program
-  {
-    public static void Main(string[] args)
-    {
-      ClassC classC = new ClassC();
-      ClassB classB = new ClassB(classC);
-      ClassA classA = new ClassA(classB);
-      classA.ActionA();
-    }
-  }
-}
-```
-![alt text](/assets/inverse.jpg)
-
-## DI 
-Install package
-```
-dotnet add package Microsoft.Extensions.DependencyInjection
+  WriteLine($"{p.Name,15} {p.GetValue(uri)}");
+});
+WriteLine($"Segments: {string.Join(", ", uri.Segments)}");
 ```
 
+**Output**
+
+```
+
+   AbsolutePath /xem/deadpool-va-wolverine-a1-tap-full-pm118754
+    AbsoluteUri https://phimmoichill.com/xem/deadpool-va-wolverine-a1-tap-full-pm118754
+      LocalPath /xem/deadpool-va-wolverine-a1-tap-full-pm118754
+      Authority phimmoichill.com
+   HostNameType Dns
+  IsDefaultPort True
+         IsFile False
+     IsLoopback False
+   PathAndQuery /xem/deadpool-va-wolverine-a1-tap-full-pm118754
+       Segments System.String[]
+          IsUnc False
+           Host phimmoichill.com
+           Port 443
+          Query
+       Fragment
+         Scheme https
+ OriginalString https://phimmoichill.com/xem/deadpool-va-wolverine-a1-tap-full-pm118754
+    DnsSafeHost phimmoichill.com
+        IdnHost phimmoichill.com
+  IsAbsoluteUri True
+    UserEscaped False
+       UserInfo
+
+
+
+Segments: /, xem/, deadpool-va-wolverine-a1-tap-full-pm118754
+```
