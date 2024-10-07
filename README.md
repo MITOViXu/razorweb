@@ -4,7 +4,7 @@
 
 ### Create folder name Utils and run following commands
 
-```
+```cs
 mkdir Utils
 dotnet new classlib
 ```
