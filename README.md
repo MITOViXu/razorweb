@@ -1,6 +1,6 @@
 # Attribute and Type 🎇🎆🎟🎞🛒🎭
 
-```
+```cs
 using static System.Console;
 using System.IO;
 namespace CS32
