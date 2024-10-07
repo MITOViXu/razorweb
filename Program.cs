@@ -1,108 +1,96 @@
 ﻿using System.Net;
 using System.Net.Http.Headers;
 using System.Net.NetworkInformation;
+using System.Text;
 using static System.Console;
-namespace CS34
+namespace CS35
 {
-
   public class Program
   {
-    static void ShowHeaders(HttpResponseHeaders headers)
+    public class MyHttpClientHandler : HttpClientHandler
     {
-      WriteLine("Cac header");
-      WriteLine();
-      WriteLine();
-      foreach (var header in headers)
+      public MyHttpClientHandler(CookieContainer cookie_container)
       {
-        WriteLine($"{header.Key}:{header.Value}");
+
+        CookieContainer = cookie_container;     // Thay thế CookieContainer mặc định
+        AllowAutoRedirect = false;                // không cho tự động Redirect
+        AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
+        UseCookies = true;
       }
-    }
-    public static async Task<string> GetWebContent(string url)
-    {
-      try
+      protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+                                                                   CancellationToken cancellationToken)
       {
-        WriteLine();
-        var HttpClient = new HttpClient();
-        HttpResponseMessage httpResponseMessage = await HttpClient.GetAsync(url);
-        string html = await httpResponseMessage.Content.ReadAsStringAsync();
-        return html;
-      }
-      catch (Exception e)
-      {
-        WriteLine(e);
-        return "Loi";
-      }
-    }
-    public static async Task<byte[]> DownloadDataBytes(string url)
-    {
-      try
-      {
-        WriteLine();
-        var HttpClient = new HttpClient();
-        HttpResponseMessage httpResponseMessage = await HttpClient.GetAsync(url);
-        byte[] bytes = await httpResponseMessage.Content.ReadAsByteArrayAsync();
-        return bytes;
-      }
-      catch (Exception e)
-      {
-        WriteLine(e);
-        return null;
+        Console.WriteLine("Bất đầu kết nối " + request.RequestUri.ToString());
+        // Thực hiện truy vấn đến Server
+        var response = await base.SendAsync(request, cancellationToken);
+        Console.WriteLine("Hoàn thành tải dữ liệu");
+        return response;
       }
     }
 
-    public static async Task DownloadStream(string url, string filename)
+    public class ChangeUri : DelegatingHandler
     {
-      try
-      {
-        WriteLine();
-        var HttpClient = new HttpClient();
-        HttpResponseMessage httpResponseMessage = await HttpClient.GetAsync(url);
+      public ChangeUri(HttpMessageHandler innerHandler) : base(innerHandler) { }
 
-        // Return a Stream type
-        var stream = await httpResponseMessage.Content.ReadAsStreamAsync();
-        int sizeBuffer = 500;
-        var buffer = new byte[sizeBuffer];
-        bool end = false;
-        using var streamWrite = File.OpenWrite(filename);
-        do
+      protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+                                                             CancellationToken cancellationToken)
+      {
+        var host = request.RequestUri.Host.ToLower();
+        Console.WriteLine($"Check in  ChangeUri - {host}");
+        if (host.Contains("google.com"))
         {
-          int numBytes = await stream.ReadAsync(buffer, 0, sizeBuffer);
-          WriteLine("Num: "+numBytes);
-          if (numBytes == 0)
-          {
-            end = true;
-          }
-          else
-          {
-            await streamWrite.WriteAsync(buffer, 0, numBytes);
-          }
-        } while (!end);
-      }
-      catch (Exception e)
-      {
-        WriteLine(e);
+          // Đổi địa chỉ truy cập từ google.com sang github
+          request.RequestUri = new Uri("https://github.com/");
+        }
+        // Chuyển truy vấn cho base (thi hành InnerHandler)
+        return base.SendAsync(request, cancellationToken);
       }
     }
 
-    static async Task Main(string[] args)
-    {
-      // Read web's content
-      string url = "https://phimmoichill.com/xem/deadpool-va-wolverine-a1-tap-full-pm118754";
-      // Http Request - HttpClient (GET/POST/)
-      WriteLine();
-      WriteLine();
 
-      string html = await GetWebContent(url);
-      // WriteLine(html);
-      // Save image file
-      var url2 = "https://i.mydramalist.com/d0oKBz_2f.png";
-      // var bytes = await DownloadDataBytes(url2);
-      string filename = "leejoobin.jpg";
-      var stream = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
-      // stream.Write(bytes, 0, bytes.Length);
-      await DownloadStream(url2, "leejoobin2.jpg");
-      WriteLine();
-      WriteLine();
+    public class DenyAccessFacebook : DelegatingHandler
+    {
+      public DenyAccessFacebook(HttpMessageHandler innerHandler) : base(innerHandler) { }
+
+      protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+                                                                   CancellationToken cancellationToken)
+      {
+
+        var host = request.RequestUri.Host.ToLower();
+        Console.WriteLine($"Check in DenyAccessFacebook - {host}");
+        if (host.Contains("facebook.com"))
+        {
+          var response = new HttpResponseMessage(HttpStatusCode.OK);
+          response.Content = new ByteArrayContent(Encoding.UTF8.GetBytes("Không được truy cập"));
+          return await Task.FromResult<HttpResponseMessage>(response);
+        }
+        // Chuyển truy vấn cho base (thi hành InnerHandler)
+        return await base.SendAsync(request, cancellationToken);
+      }
+    }
+    public static async Task Main(string[] args)
+    {
+      string url = "https://www.facebook.com/xuanthulab";
+
+      CookieContainer cookies = new CookieContainer();
+
+      // TẠO CHUỖI HANDLER
+      var bottomHandler = new MyHttpClientHandler(cookies);              // handler đáy (cuối)
+      var changeUriHandler = new ChangeUri(bottomHandler);
+      var denyAccessFacebook = new DenyAccessFacebook(changeUriHandler); // handler đỉnh
+
+      // Khởi tạo HttpCliet với hander đỉnh chuỗi hander
+      var httpClient = new HttpClient(denyAccessFacebook);
+
+      // Thực hiện truy vấn
+      httpClient.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml+json");
+      httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0");
+      HttpResponseMessage response = await httpClient.GetAsync(url);
+      response.EnsureSuccessStatusCode();
+      string htmltext = await response.Content.ReadAsStringAsync();
+
+      Console.WriteLine(htmltext);
+
     }
   }
 }
