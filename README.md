@@ -1,6 +1,6 @@
 # Asynchronous 🎇🎆🎟🎞🛒🎭
 
-```
+```cs
 using System.Text;
 using static System.Console;
 using static System.ConsoleColor;
