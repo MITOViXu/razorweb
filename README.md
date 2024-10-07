@@ -1,6 +1,6 @@
 # Dependencies injection and ServiceCollection 🎇🎆🎟🎞🛒🎭
 
-```
+```cs
 using static System.Console;
 using System.IO;
 using Microsoft.Extensions.DependencyInjection;
