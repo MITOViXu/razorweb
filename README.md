@@ -1,6 +1,6 @@
 # extension method 🎇🎆🎟🎞🛒🎭
 
-```
+```cs
 using static System.Console;
 using static System.ConsoleColor;
 using static System.Math;
