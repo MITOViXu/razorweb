@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("razorweb")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e16a2edffd002d18cdda0fafb241a76f84074855")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+886a185e2a8175dd741c5b2c4a32f5d2496b32bb")]
 [assembly: System.Reflection.AssemblyProductAttribute("razorweb")]
 [assembly: System.Reflection.AssemblyTitleAttribute("razorweb")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

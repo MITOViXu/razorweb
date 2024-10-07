@@ -1,6 +1,6 @@
 # Networking part 1: HttpClient
 
-## uri and url
+### uri and url
 
 ```cs
 string url = "https://phimmoichill.com/xem/deadpool-va-wolverine-a1-tap-full-pm118754";
@@ -13,10 +13,9 @@ uriType.GetProperties().ToList().ForEach(p =>
 WriteLine($"Segments: {string.Join(", ", uri.Segments)}");
 ```
 
-**Output**
+_Output_
 
 ```
-
    AbsolutePath /xem/deadpool-va-wolverine-a1-tap-full-pm118754
     AbsoluteUri https://phimmoichill.com/xem/deadpool-va-wolverine-a1-tap-full-pm118754
       LocalPath /xem/deadpool-va-wolverine-a1-tap-full-pm118754
@@ -41,6 +40,58 @@ WriteLine($"Segments: {string.Join(", ", uri.Segments)}");
        UserInfo
 
 
-
 Segments: /, xem/, deadpool-va-wolverine-a1-tap-full-pm118754
 ```
+
+### Host name
+
+```cs
+var hostname = Dns.GetHostName();
+WriteLine("Host name: "+hostname);
+WriteLine("Website's host name: "+uri.Host);
+```
+
+_Out put_
+
+```
+Host name: DESKTOP-B77AKP1
+Website's host name: phimmoichill.com
+```
+
+### Ping
+
+```cs
+var ping = new Ping();
+var pingReply = ping.Send("phimmoichill.com");
+WriteLine(pingReply.Status);
+if (pingReply.Status == IPStatus.Success) WriteLine(pingReply.RoundtripTime + "\n" + pingReply.Address);
+```
+
+_Out put_
+
+```
+Success
+65
+172.67.73.132
+```
+
+### IP
+
+```cs
+ var ip = Dns.GetHostEntry(uri.Host);
+ip.AddressList.ToList().ForEach(i => WriteLine(i));
+```
+
+_Out put_
+
+```
+172.67.73.132
+104.26.11.163
+104.26.10.163
+2606:4700:20::681a:aa3
+2606:4700:20::681a:ba3
+2606:4700:20::ac43:4984
+```
+
+## Using .Net for Query
+
