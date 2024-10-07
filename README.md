@@ -1,6 +1,6 @@
 # File and File Stream 🎇🎆🎟🎞🛒🎭
 
-```
+```cs
 using System.Text;
 using static System.Console;
 using static System.ConsoleColor;
