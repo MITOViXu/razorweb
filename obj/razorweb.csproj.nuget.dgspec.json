@@ -40,9 +40,9 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Newtonsoft.Json": {
+            "System.Data.SqlClient": {
               "target": "Package",
-              "version": "[13.0.3, )"
+              "version": "[4.8.6, )"
             }
           },
           "imports": [
