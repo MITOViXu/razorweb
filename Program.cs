@@ -2,95 +2,84 @@
 using System.Net.Http.Headers;
 using System.Net.NetworkInformation;
 using System.Text;
+using Newtonsoft.Json;
 using static System.Console;
-namespace CS35
+namespace CS36
 {
   public class Program
   {
-    public class MyHttpClientHandler : HttpClientHandler
+    class MyHttpListener
     {
-      public MyHttpClientHandler(CookieContainer cookie_container)
+      private HttpListener listener;
+      public MyHttpListener(string[] prefixes)
       {
-
-        CookieContainer = cookie_container;     // Thay thế CookieContainer mặc định
-        AllowAutoRedirect = false;                // không cho tự động Redirect
-        AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
-        UseCookies = true;
-      }
-      protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-                                                                   CancellationToken cancellationToken)
-      {
-        Console.WriteLine("Bất đầu kết nối " + request.RequestUri.ToString());
-        // Thực hiện truy vấn đến Server
-        var response = await base.SendAsync(request, cancellationToken);
-        Console.WriteLine("Hoàn thành tải dữ liệu");
-        return response;
-      }
-    }
-
-    public class ChangeUri : DelegatingHandler
-    {
-      public ChangeUri(HttpMessageHandler innerHandler) : base(innerHandler) { }
-
-      protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-                                                             CancellationToken cancellationToken)
-      {
-        var host = request.RequestUri.Host.ToLower();
-        Console.WriteLine($"Check in  ChangeUri - {host}");
-        if (host.Contains("google.com"))
+        if (!HttpListener.IsSupported)
         {
-          // Đổi địa chỉ truy cập từ google.com sang github
-          request.RequestUri = new Uri("https://github.com/");
+          throw new Exception("HttpListener is not supported");
         }
-        // Chuyển truy vấn cho base (thi hành InnerHandler)
-        return base.SendAsync(request, cancellationToken);
+        listener = new HttpListener();
+        foreach (string prefix in prefixes) listener.Prefixes.Add(prefix);
       }
-    }
-
-
-    public class DenyAccessFacebook : DelegatingHandler
-    {
-      public DenyAccessFacebook(HttpMessageHandler innerHandler) : base(innerHandler) { }
-
-      protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-                                                                   CancellationToken cancellationToken)
+      public async Task Start()
       {
-
-        var host = request.RequestUri.Host.ToLower();
-        Console.WriteLine($"Check in DenyAccessFacebook - {host}");
-        if (host.Contains("facebook.com"))
+        listener.Start();
+        WriteLine("Http Server started");
+        do
         {
-          var response = new HttpResponseMessage(HttpStatusCode.OK);
-          response.Content = new ByteArrayContent(Encoding.UTF8.GetBytes("Không được truy cập"));
-          return await Task.FromResult<HttpResponseMessage>(response);
-        }
-        // Chuyển truy vấn cho base (thi hành InnerHandler)
-        return await base.SendAsync(request, cancellationToken);
+          WriteLine(DateTime.Now.ToLongTimeString() + " waiting a client connect");
+          var context = await listener.GetContextAsync();
+          ProcessRequest(context);
+        } while (listener.IsListening);
       }
+      async Task ProcessRequest(HttpListenerContext context)
+      {
+        HttpListenerRequest request = context.Request;
+        HttpListenerResponse response = context.Response;
+        WriteLine($"{request.HttpMethod} {request.RawUrl} {request.Url.AbsolutePath}");
+        var outputStream = response.OutputStream;
+        switch (request.Url.AbsolutePath)
+        {
+          case "/":
+            {
+              var bufer = Encoding.UTF8.GetBytes("<h1>Xin chao cac ban</h1>");
+              await outputStream.WriteAsync(bufer, 0, bufer.Length);
+              response.ContentLength64 = bufer.Length;
+            }
+            break;
+          case "/json":
+            {
+              // return type
+              response.Headers.Add("Content-Type", "application/json");
+              response.Headers.Add("Content-Type", "text/html");
+              var product = new
+              {
+                Name = "Macbook Pro",
+                Price = 2000,
+              };
+              var p = JsonConvert.SerializeObject(product);
+              var bufer = Encoding.UTF8.GetBytes(p);
+              await outputStream.WriteAsync(bufer, 0, bufer.Length);
+              response.ContentLength64 = bufer.Length;
+            }
+            break;
+          case "/image":
+            {
+              // return type
+              response.Headers.Add("Content-Type", "image/png");
+              var bufer = await File.ReadAllBytesAsync("image.png");
+              await outputStream.WriteAsync(bufer, 0, bufer.Length);
+              response.ContentLength64 = bufer.Length;
+            }
+            break;
+        }
+        outputStream.Close();
+      }
+
     }
     public static async Task Main(string[] args)
     {
-      string url = "https://www.facebook.com/xuanthulab";
-
-      CookieContainer cookies = new CookieContainer();
-
-      // TẠO CHUỖI HANDLER
-      var bottomHandler = new MyHttpClientHandler(cookies);              // handler đáy (cuối)
-      var changeUriHandler = new ChangeUri(bottomHandler);
-      var denyAccessFacebook = new DenyAccessFacebook(changeUriHandler); // handler đỉnh
-
-      // Khởi tạo HttpCliet với hander đỉnh chuỗi hander
-      var httpClient = new HttpClient(denyAccessFacebook);
-
-      // Thực hiện truy vấn
-      httpClient.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml+json");
-      httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0");
-      HttpResponseMessage response = await httpClient.GetAsync(url);
-      response.EnsureSuccessStatusCode();
-      string htmltext = await response.Content.ReadAsStringAsync();
-
-      Console.WriteLine(htmltext);
-
+      var server = new MyHttpListener(new string[] { "http://*:8080/" });
+      await server.Start();
     }
   }
 }
