@@ -26,18 +26,35 @@ namespace CS37
       WriteLine(connection.State);
 
       // auto free up resources
+
       using DbCommand command = new SqlCommand();
       command.Connection = connection;
-      command.CommandText = "Select top(5) * from SANPHAM";
+      command.CommandText = @"SELECT TOP (100) *
+                              FROM Danhmuc
+                              Where DanhmucID >= @DanhmucId";
+      // command.ExecuteReader(); - Used for return value with multiple line
+      // command.ExecuteScalar(); - Used for return only 1 value 
+      // command.ExecuteNonQuery(); - Used for Insert, Update, Delete.
+      var parameters = command.CreateParameter();
+      parameters.ParameterName = "@DanhmucId";
+      parameters.Value = 6;
+      command.Parameters.Add(parameters);
+
       var data = command.ExecuteReader();
+
       while (data.Read())
       {
-        WriteLine($"{data["TenSanPham"],30}, {data["Gia"],30}");
+        WriteLine($"{data["TenDanhMuc"],30}, {data["DanhmucID"],30}");
       }
-
+      var sqlReader = command.ExecuteReader();
+      if (sqlReader.HasRows)
+        while (sqlReader.Read())
+        {
+          var id = sqlReader.GetInt32(0);
+          var ten = sqlReader["TenDanhMuc"];
+        }
       connection.Close();
       WriteLine(connection.State);
-
     }
   }
 }
