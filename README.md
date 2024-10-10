@@ -199,7 +199,7 @@ namespace CS40
       // Rename("Sản phẩm 3", 3);
       // Rename("Sản phẩm 4", 4);
       ReadProducts();
-
+      
       // Logging -
       WriteLine();
       WriteLine();
