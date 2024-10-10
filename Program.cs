@@ -2,102 +2,123 @@
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Text;
+using ef;
+using Microsoft.EntityFrameworkCore;
 using static System.Console;
-namespace CS39
+namespace CS40
 {
   public class Program
   {
-    public static void ShowDataTable(DataTable table)
+    static void CreateDataBase()
     {
-      WriteLine("Ten cua bang" + table.TableName);
-      foreach (DataColumn i in table.Columns)
+      try
       {
-        WriteLine("Ten cot: " + i.ColumnName);
+        var dbContext = new ProductDbContext();
+        string dbname = dbContext.Database.GetDbConnection().Database;
+        var result = dbContext.Database.EnsureCreated();
+        if (result) WriteLine("Khoi tao thanh cong CSDL: " + dbname);
+        else WriteLine("Khong tao duoc");
       }
-      WriteLine();
-      int numCol = table.Columns.Count;
-      foreach (DataRow i in table.Rows)
+      catch (System.Exception e)
       {
-        Write("\nGia tri: ");
-        for (int j = 0; j < numCol; j++)
-        {
-          if (j + 1 == numCol) Write(i[j]);
-          else Write(i[j] + " - ");
-        }
+        WriteLine("Error : " + e);
+        // throw;
       }
-      WriteLine();
+    }
+    static void DropDataBase()
+    {
+      try
+      {
+        var dbContext = new ProductDbContext();
+        string dbname = dbContext.Database.GetDbConnection().Database;
+        var result = dbContext.Database.EnsureDeleted();
+        if (result) WriteLine("Xoa thanh cong CSDL: " + dbname);
+        else WriteLine("Khong tao duoc");
+      }
+      catch (System.Exception e)
+      {
+        WriteLine("Error : " + e);
+        // throw;
+      }
+    }
+    static async void Insert()
+    {
+      using var dbContext = new ProductDbContext();
+      /*
+        - Model (Product)
+        - Add, AddAsync 
+        - SaveChange
+      */
+
+      // Add independent element
+      // var p1 = new Product();
+      // p1.ProductName = "San pham 1";
+      // p1.Provider = "Cong ty 1";
+      // await dbContext.AddAsync(p1);
+      // var sodong = dbContext.SaveChanges();
+
+      // Add an array of products
+      var p1 = new Product[]{
+        new Product("San pham 2","Cong ty 2"),
+        new Product("San pham 3","Cong ty 3"),
+        new Product("San pham 4","Cong ty 4")
+      };
+
+      await dbContext.AddRangeAsync(p1);
+      var sodong = dbContext.SaveChanges();
+      WriteLine("So dong da insert: " + sodong);
+    }
+    static void ReadProducts()
+    {
+      var dbContext = new ProductDbContext();
+
+      // Linq
+      // var products = dbContext.products.ToList();
+      // products.ForEach(p => { p.Info(); });
+      var qr = from prod in dbContext.products
+               where prod.ProductId >= 1 && prod.Provider.Contains("ong")
+               orderby prod.ProductId descending
+               select prod;
+      Write("\nCác sản phẩm có ID lớn hơn 1\n");
+      qr.ToList().ForEach(x => x.Info());
+
+      var qr2 = (from prod in dbContext.products
+                 where prod.ProductId >= 1 && prod.Provider.Contains("ong")
+                 orderby prod.ProductId descending
+                 select prod).FirstOrDefault();
+      Write("\n \nMột sản phẩm duy nhất: ");
+      qr2?.Info();
+    }
+    static void Rename(string name, int id)
+    {
+      using var dbContext = new ProductDbContext();
+      var pro = (from p in dbContext.products
+                 where p.ProductId == id
+                 select p).FirstOrDefault();
+      pro?.Info();
+      if (pro != null) pro.ProductName = name;
+      WriteLine("Đã cập nhật " + dbContext.SaveChanges() + " dòng");
     }
     public static void Main(string[] args)
     {
-      Console.OutputEncoding = System.Text.Encoding.UTF8;
-      var stringBuilder = new SqlConnectionStringBuilder();
-      stringBuilder["Data Source"] = "192.168.1.110, 1433";
-      stringBuilder["Initial Catalog"] = "xtlab";
-      stringBuilder["PWD"] = "Password123";
-      stringBuilder["UID"] = "sa";
+      OutputEncoding = Encoding.UTF8;
+      // Entity -> Database, Table
+      // Database - SQL Server : data01 -> DnContext
+      // --product
 
-      // string sqlStringConnection = @"Data Source =  192.168.1.110, 1433; 
-      //                                Initial Catalog = xtlab; 
-      //                                PWD=Password123; 
-      //                                UID=sa";
+      // DropDataBase();
+      // CreateDataBase();
+      // Insert();
+      // ReadProducts();
+      // Rename("Sản phẩm 1", 1);
+      // Rename("Sản phẩm 2", 2);
+      // Rename("Sản phẩm 3", 3);
+      // Rename("Sản phẩm 4", 4);
+      ReadProducts();
 
-      var connection = new SqlConnection(stringBuilder.ToString());
-      WriteLine(connection.State);
-      connection.Open();
-      WriteLine(connection.State);
-
-      // auto free up resources
-
-      var dataset = new DataSet();
-      var table = new DataTable("MyTable");
-      dataset.Tables.Add(table);
-
-      table.Columns.Add("STT");
-      table.Columns.Add("Hoten");
-      table.Columns.Add("Tuoi");
-      table.Columns.Add("NamSinh");
-
-      table.Rows.Add(1, "Minh Toan", 21, 2003);
-      table.Rows.Add(2, "Minh Toan 2", 21, 2003);
-      table.Rows.Add(3, "Minh Toan 3", 21, 2003);
-      table.Rows.Add(4, "Minh Toan 4", 21, 2003);
-
-      ShowDataTable(table);
-
-      var adapter = new SqlDataAdapter();
-      adapter.TableMappings.Add("Table", "NhanVien");
-
-      // We must call SelectCommand
-      adapter.SelectCommand = new SqlCommand("select NhanviennID, Ten, Ho, Anh from NhanVien", connection);
-
-      DataSet dataSet = new DataSet();
-      adapter.Fill(dataSet);
-
-      table = dataSet.Tables["NhanVien"];
-      ShowDataTable(table);
-
-      // var row = table.Rows.Add();
-      // row["Ten"] = "Abc";
-      // row["Ho"] = "Nguyen";
-
-      // We must call InsertCommand
-      adapter.InsertCommand = new SqlCommand("insert into NhanVien (Ho, Ten) values (@Ho, @Ten)", connection);
-      adapter.InsertCommand.Parameters.Add("@Ho", SqlDbType.NChar, 255, "Ho");
-      adapter.InsertCommand.Parameters.Add("@Ten", SqlDbType.NChar, 255, "Ten");
-      // We must call DeleteCommand
-      adapter.DeleteCommand = new SqlCommand("delete from NhanVien where NhanviennID = @NhanviennID", connection);
-      var para = adapter.DeleteCommand.Parameters.Add(new SqlParameter("@NhanviennID", SqlDbType.Int));
-      para.SourceColumn = "NhanviennID";
-      para.SourceVersion = DataRowVersion.Original;
-
-      // Insert data, update data
-      var row10 = table.Rows[10];
-      row10.Delete();
+      // Logging - 
       WriteLine();
-
-      adapter.Update(dataSet);
-      connection.Close();
-      WriteLine(connection.State);
+      WriteLine();
     }
   }
 }
