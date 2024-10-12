@@ -5,31 +5,24 @@ using System.Text;
 using ef;
 using Microsoft.EntityFrameworkCore;
 using static System.Console;
-namespace CS40
+namespace CS41
 {
-  public class Program
+  public partial class Program
   {
-    static void CreateDataBase()
+    static void CreateDatabase()
     {
-      try
-      {
-        var dbContext = new ProductDbContext();
-        string dbname = dbContext.Database.GetDbConnection().Database;
-        var result = dbContext.Database.EnsureCreated();
-        if (result) WriteLine("Khoi tao thanh cong CSDL: " + dbname);
-        else WriteLine("Khong tao duoc");
-      }
-      catch (System.Exception e)
-      {
-        WriteLine("Error : " + e);
-        // throw;
-      }
+      using DbContext dbContext = new ShopContext();
+      string name = dbContext.Database.GetDbConnection().Database;
+      var result = dbContext.Database.EnsureCreated();
+      if (result) WriteLine("Khoi tao thanh cong CSDL: " + name);
+      else WriteLine("Khong tao duoc");
+
     }
     static void DropDataBase()
     {
       try
       {
-        var dbContext = new ProductDbContext();
+        var dbContext = new ShopContext();
         string dbname = dbContext.Database.GetDbConnection().Database;
         var result = dbContext.Database.EnsureDeleted();
         if (result) WriteLine("Xoa thanh cong CSDL: " + dbname);
@@ -41,84 +34,67 @@ namespace CS40
         // throw;
       }
     }
-    static async void Insert()
+    static async Task InsertData()
     {
-      using var dbContext = new ProductDbContext();
-      /*
-        - Model (Product)
-        - Add, AddAsync 
-        - SaveChange
-      */
+      using var dbContext = new ShopContext();
+      Category c1 = new Category("Điện thoại", "Các loại Điện thoại");
+      Category c2 = new Category("Đồ uống", "Các loại đồ uống");
+      await dbContext.categories.AddAsync(c1);
+      await dbContext.categories.AddAsync(c2);
+      WriteLine(c1?.CategoryId);
+      if (c1 != null && c2 != null)
+      {
+        Product p1 = new Product() { Name = "Iphone 16", Price = 16m, CateId = 1 };
+        Product p2 = new Product() { Name = "Huawei Pro", Price = 30m, Category = c1 };
+        Product p3 = new Product() { Name = "Rượu Vang", Price = 3m, CateId = 2 };
+        Product p4 = new Product() { Name = "Coca cola", Price = 1m, Category = c2 };
+        await dbContext.AddAsync(p1);
+        await dbContext.AddAsync(p2);
+        await dbContext.AddAsync(p3);
+        await dbContext.AddAsync(p4);
+      }
 
-      // Add independent element
-      // var p1 = new Product();
-      // p1.ProductName = "San pham 1";
-      // p1.Provider = "Cong ty 1";
-      // await dbContext.AddAsync(p1);
-      // var sodong = dbContext.SaveChanges();
+      await dbContext.SaveChangesAsync();
 
-      // Add an array of products
-      var p1 = new Product[]{
-        new Product("San pham 2","Cong ty 2"),
-        new Product("San pham 3","Cong ty 3"),
-        new Product("San pham 4","Cong ty 4")
-      };
-
-      await dbContext.AddRangeAsync(p1);
-      var sodong = dbContext.SaveChanges();
-      WriteLine("So dong da insert: " + sodong);
     }
-    static void ReadProducts()
-    {
-      var dbContext = new ProductDbContext();
-
-      // Linq
-      // var products = dbContext.products.ToList();
-      // products.ForEach(p => { p.Info(); });
-      var qr = from prod in dbContext.products
-               where prod.ProductId >= 1 && prod.Provider.Contains("ong")
-               orderby prod.ProductId descending
-               select prod;
-      Write("\nCác sản phẩm có ID lớn hơn 1\n");
-      qr.ToList().ForEach(x => x.Info());
-
-      var qr2 = (from prod in dbContext.products
-                 where prod.ProductId >= 1 && prod.Provider.Contains("ong")
-                 orderby prod.ProductId descending
-                 select prod).FirstOrDefault();
-      Write("\n \nMột sản phẩm duy nhất: ");
-      qr2?.Info();
-    }
-    static void Rename(string name, int id)
-    {
-      using var dbContext = new ProductDbContext();
-      var pro = (from p in dbContext.products
-                 where p.ProductId == id
-                 select p).FirstOrDefault();
-      pro?.Info();
-      if (pro != null) pro.ProductName = name;
-      WriteLine("Đã cập nhật " + dbContext.SaveChanges() + " dòng");
-    }
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
       OutputEncoding = Encoding.UTF8;
-      // Entity -> Database, Table
-      // Database - SQL Server : data01 -> DnContext
-      // --product
-
       // DropDataBase();
-      // CreateDataBase();
-      // Insert();
-      // ReadProducts();
-      // Rename("Sản phẩm 1", 1);
-      // Rename("Sản phẩm 2", 2);
-      // Rename("Sản phẩm 3", 3);
-      // Rename("Sản phẩm 4", 4);
-      ReadProducts();
+      // CreateDatabase();
+      // await InsertData();
 
-      // Logging - 
-      WriteLine();
-      WriteLine();
+      // Linq
+      var dbContext = new ShopContext();
+      var product = (from p in dbContext.products where p.ProductId == 3 select p).FirstOrDefault();
+
+      // reference to get data of another board data
+      if (product != null)
+      {
+        var entry = dbContext.Entry(product);
+        // used for reference
+        
+        // I use Lazyload, so no need to call this command
+        // await entry.Reference(p => p.Category).LoadAsync();
+        if (product.Category != null)
+        {
+          WriteLine($"\n{product.Category.Name} - {product.Category.Description}");
+          WriteLine("\nCác sản phẩm thuộc loại 1 (loại " + product.Category.Name + ")");
+          
+          // Using Layzyload, we don't need to call these commands
+
+          // var e = dbContext.Entry(product.Category);
+          // // used for collection navigation
+          // await e.Collection(c => c.Products).LoadAsync();
+          
+          WriteLine($"\nSố sản phẩm: {product?.Category?.Products?.Count()}");
+          product?.Category?.Products?.ForEach(p => p.PrintInfo());
+        }
+      }
+
+      WriteLine("\nSan pham voi ID = " + product?.ProductId);
+      product?.PrintInfo();
+      Write("\n");
     }
   }
 }
