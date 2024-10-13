@@ -60,41 +60,41 @@ namespace CS41
     public static async Task Main(string[] args)
     {
       OutputEncoding = Encoding.UTF8;
-      // DropDataBase();
-      // CreateDatabase();
+      DropDataBase();
+      CreateDatabase();
       // await InsertData();
 
       // Linq
-      var dbContext = new ShopContext();
-      var product = (from p in dbContext.products where p.ProductId == 3 select p).FirstOrDefault();
+      // var dbContext = new ShopContext();
+      // var product = (from p in dbContext.products where p.ProductId == 3 select p).FirstOrDefault();
 
-      // reference to get data of another board data
-      if (product != null)
-      {
-        var entry = dbContext.Entry(product);
-        // used for reference
-        
-        // I use Lazyload, so no need to call this command
-        // await entry.Reference(p => p.Category).LoadAsync();
-        if (product.Category != null)
-        {
-          WriteLine($"\n{product.Category.Name} - {product.Category.Description}");
-          WriteLine("\nCác sản phẩm thuộc loại 1 (loại " + product.Category.Name + ")");
-          
-          // Using Layzyload, we don't need to call these commands
+      // // reference to get data of another board data
+      // if (product != null)
+      // {
+      //   var entry = dbContext.Entry(product);
+      //   // used for reference
 
-          // var e = dbContext.Entry(product.Category);
-          // // used for collection navigation
-          // await e.Collection(c => c.Products).LoadAsync();
-          
-          WriteLine($"\nSố sản phẩm: {product?.Category?.Products?.Count()}");
-          product?.Category?.Products?.ForEach(p => p.PrintInfo());
-        }
-      }
+      //   // I use Lazyload, so no need to call this command
+      //   await entry.Reference(p => p.Category).LoadAsync();
+      //   if (product.Category != null)
+      //   {
+      //     WriteLine($"\n{product.Category.Name} - {product.Category.Description}");
+      //     WriteLine("\nCác sản phẩm thuộc loại 1 (loại " + product.Category.Name + ")");
 
-      WriteLine("\nSan pham voi ID = " + product?.ProductId);
-      product?.PrintInfo();
-      Write("\n");
+      //     // Using Layzyload, we don't need to call these commands
+
+      //     var e = dbContext.Entry(product.Category);
+      //     // used for collection navigation
+      //     await e.Collection(c => c.Products).LoadAsync();
+
+      //     WriteLine($"\nSố sản phẩm: {product?.Category?.Products?.Count()}");
+      //     product?.Category?.Products?.ForEach(p => p.PrintInfo());
+      //   }
+      // }
+
+      // WriteLine("\nSan pham voi ID = " + product?.ProductId);
+      // product?.PrintInfo();
+      // Write("\n");
     }
   }
 }

@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using static System.Console;
 namespace ef
 {
-  [Table("Product")]
+  // [Table("Product")]
   public class Product
   {
-    [Key]
+    // [Key]
     public int ProductId { set; get; }
 
     [Required]
@@ -25,6 +25,9 @@ namespace ef
     // auto load using LazyLoad, we must use virtual
     public virtual Category? Category { set; get; }
 
+
+    public int? CateId2 { set; get; }
+    public virtual Category? Category2 { set; get; }
 
     public void PrintInfo()
     {

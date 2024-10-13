@@ -20,8 +20,12 @@ namespace ef
       Name = name;
       Description = description;
     }
+
+    // Relation one - one with another board
+
     // Collect Navigation
     // auto load use Lazyload, we must use virtual
     public virtual List<Product>? Products { get; set; }
+    public CategoryDetail categoryDetail { get; set; }
   }
 }
