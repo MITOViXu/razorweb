@@ -61,7 +61,7 @@ namespace CS41
     {
       OutputEncoding = Encoding.UTF8;
       DropDataBase();
-      CreateDatabase();
+      // CreateDatabase();
       // await InsertData();
 
       // Linq
