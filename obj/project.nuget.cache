@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "29PhduuP+PF41DQNXK8FHRlfefgn0jr8rWcFVnn638570wffEfqTnUflvMI/99h5Za8XMcjcZpEXb4I5vA52MA==",
+  "success": true,
+  "projectFilePath": "D:\\razorweb\\razorweb.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\MINH TOAN\\.nuget\\packages\\buildbundlerminifier\\3.2.449\\buildbundlerminifier.3.2.449.nupkg.sha512"
+  ],
+  "logs": []
+}
