@@ -6,8 +6,7 @@ namespace CS43
   public class Tag
   {
     [Key]
-    [StringLength(20)]
-    public string TagId { get; set; }
+    public int TagIdNew { get; set; }
     [Column(TypeName = "ntext")]
     public string Content { get; set; }
   }

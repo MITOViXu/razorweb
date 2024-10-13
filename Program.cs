@@ -14,7 +14,7 @@ namespace CS43
       // webdb
 
       var dbContext = new WebContext();
-      dbContext.Database.EnsureDeleted();
+      
     }
   }
 }

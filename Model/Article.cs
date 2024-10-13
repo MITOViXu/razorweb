@@ -9,6 +9,8 @@ namespace CS43
     [Key]
     public int ArticleId { get; set; }
     [StringLength(100)]
-    public string Title { get; set; }
+    public string Name { get; set; }
+    [Column(TypeName = "ntext")]
+    public string Content { get; set; }
   }
 }

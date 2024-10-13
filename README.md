@@ -25,3 +25,57 @@ dotnet add package Microsoft.EntityFrameworkCore.Proxies
 ```bash
 dotnet tool install --global dotnet-ef
 ```
+
+## Create migration
+
+```bash
+dotnet ef migrations add MigrationName
+```
+
+ex
+
+```bash
+dotnet ef migrations add V0
+```
+
+## To check if any migrations are exist
+
+```bash
+dotnet ef migrations list
+```
+
+## Delete the last migraion
+
+```bash
+dotnet ef migrations remove
+```
+
+## Push to database
+
+```bash
+dotnet ef database update
+```
+
+## Delete database
+
+```bash
+dotnet ef database drop -f
+```
+
+## Return specific migration version
+
+```bash
+dotnet ef database update [NameMigation]
+```
+
+ex
+
+```bash
+dotnet ef database update V0
+```
+
+## Show all query from V0 to latest V version
+
+```bash
+dotnet ef migrations script
+```
