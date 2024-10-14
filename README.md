@@ -1,81 +1,75 @@
-# Entity Framework establish relationship 1 - many 🎄🎋🎆🧨🎉🎃
+# Middleware, pipleline and processing flow in HttpContext 🎍🎪🎢🎭🧶
 
-## Install EF packages
+## FirstMiddleware.cs
 
-```bash
-dotnet add package System.Data.SqlClient
-dotnet add package Microsoft.EntityFrameworkCore
-dotnet add package Microsoft.EntityFrameworkCore.SqlServer
-dotnet add package Microsoft.EntityFrameworkCore.Design
-dotnet add package Microsoft.Extensions.DependencyInjection
-dotnet add package Microsoft.Extensions.Logging
-dotnet add package Microsoft.Extensions.Logging.Console
-dotnet add package Microsoft.EntityFrameworkCore.Tools.DotNet
+```cs
+public class FirstMiddleware
+{
+    private readonly RequestDelegate _next;
 
+    public FirstMiddleware(RequestDelegate next)
+    {
+        _next = next;
+    }
+    public async Task InvokeAsync(HttpContext context)
+    {
+        Console.WriteLine(context.Request.Path);
+        context.Items.Add("data", "\nXin chao ban tro lai voi " + context.Request.Path);
+        await _next(context);
+    }
+}
 ```
 
-## Install Proxy
+## SecondMiddleware.cs
 
-```bash
-dotnet add package Microsoft.EntityFrameworkCore.Proxies
+```cs
+public class SecondMiddleware
+{
+  private readonly RequestDelegate _next;
+  public SecondMiddleware(RequestDelegate next)
+  {
+    _next = next;
+  }
+  public async Task InvokeAsync(HttpContext context)
+  {
+    if (context.Request.Path == "/xxx.html")
+    {
+      await context.Response.WriteAsync("\nBan khong duoc truy cap");
+      return;
+    }
+    else
+    {
+      await context.Response.WriteAsync("Ban duoc truy cap ");
+      var data = context.Items["data"];
+      if (data != null) await context.Response.WriteAsync((string)data);
+      await _next(context);
+    }
+  }
+}
 ```
 
-## .NET 3.0 trở đi cài lệnh dotnet ef bằng
+## UseMiddleware.cs
 
-```bash
-dotnet tool install --global dotnet-ef
+```cs
+public static class UseMiddleware
+{
+  public static void UseFirstMiddleware(this IApplicationBuilder app){
+    app.UseMiddleware<FirstMiddleware>();
+  }
+  public static void UseSecondMiddleware(this IApplicationBuilder app){
+    app.UseMiddleware<SecondMiddleware>();
+  }
+}
 ```
 
-## Create migration
+## Program.cs
 
-```bash
-dotnet ef migrations add MigrationName
-```
+```cs
+var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+app.UseStaticFiles();
+app.UseFirstMiddleware();
+app.UseSecondMiddleware();
+app.Run();
 
-ex
-
-```bash
-dotnet ef migrations add V0
-```
-
-## To check if any migrations are exist
-
-```bash
-dotnet ef migrations list
-```
-
-## Delete the last migraion
-
-```bash
-dotnet ef migrations remove
-```
-
-## Push to database
-
-```bash
-dotnet ef database update
-```
-
-## Delete database
-
-```bash
-dotnet ef database drop -f
-```
-
-## Return specific migration version
-
-```bash
-dotnet ef database update [NameMigation]
-```
-
-ex
-
-```bash
-dotnet ef database update V0
-```
-
-## Show all query from V0 to latest V version
-
-```bash
-dotnet ef migrations script
 ```

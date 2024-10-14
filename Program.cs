@@ -1,20 +1,6 @@
-﻿using System.Data;
-using System.Data.Common;
-using System.Data.SqlClient;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
-using static System.Console;
-namespace CS43
-{
-  public partial class Program
-  {
-    public static void Main(string[] args)
-    {
-      // migration: code => database
-      // webdb
-
-      var dbContext = new WebContext();
-      
-    }
-  }
-}
+var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+app.UseStaticFiles();
+app.UseFirstMiddleware();
+app.UseSecondMiddleware();
+app.Run();
