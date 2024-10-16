@@ -1,75 +1,22 @@
-# Middleware, pipleline and processing flow in HttpContext 🎍🎪🎢🎭🧶
-
-## FirstMiddleware.cs
+# Application Config and DI 🎍🎪🎢🎭🧶
 
 ```cs
-public class FirstMiddleware
-{
-    private readonly RequestDelegate _next;
-
-    public FirstMiddleware(RequestDelegate next)
-    {
-        _next = next;
-    }
-    public async Task InvokeAsync(HttpContext context)
-    {
-        Console.WriteLine(context.Request.Path);
-        context.Items.Add("data", "\nXin chao ban tro lai voi " + context.Request.Path);
-        await _next(context);
-    }
-}
-```
-
-## SecondMiddleware.cs
-
-```cs
-public class SecondMiddleware
-{
-  private readonly RequestDelegate _next;
-  public SecondMiddleware(RequestDelegate next)
-  {
-    _next = next;
-  }
-  public async Task InvokeAsync(HttpContext context)
-  {
-    if (context.Request.Path == "/xxx.html")
-    {
-      await context.Response.WriteAsync("\nBan khong duoc truy cap");
-      return;
-    }
-    else
-    {
-      await context.Response.WriteAsync("Ban duoc truy cap ");
-      var data = context.Items["data"];
-      if (data != null) await context.Response.WriteAsync((string)data);
-      await _next(context);
-    }
-  }
-}
-```
-
-## UseMiddleware.cs
-
-```cs
-public static class UseMiddleware
-{
-  public static void UseFirstMiddleware(this IApplicationBuilder app){
-    app.UseMiddleware<FirstMiddleware>();
-  }
-  public static void UseSecondMiddleware(this IApplicationBuilder app){
-    app.UseMiddleware<SecondMiddleware>();
-  }
-}
-```
-
-## Program.cs
-
-```cs
+using System.Text;
+using static System.Console;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
-app.UseStaticFiles();
-app.UseFirstMiddleware();
-app.UseSecondMiddleware();
-app.Run();
 
+app.MapGet("/", () => "Hello World!");
+app.MapGet("/ShowOptions", async (context) =>
+{
+  var configuration = context.RequestServices.GetService<IConfiguration>();
+  var testOption = configuration.GetSection("TestOptions").Get<Testoptions>();
+  var opt_key = testOption.opt_key1;
+  var opt_key21 = testOption.opt_key2.k1;
+  var opt_key22 = testOption.opt_key2.k2;
+  var content = new StringBuilder();
+  content.Append("\nOption: " + opt_key + " " + opt_key21 + " " + opt_key22 + " ");
+  await context.Response.WriteAsync(content.ToString());
+});
+app.Run();
 ```

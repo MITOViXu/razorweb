@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "razorweb", "razorweb.csproj", "{1CF58C01-3E98-4122-8A63-51D1E07BA994}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "razorweb", "razorweb.csproj", "{C179FD6A-B6C9-4A7F-9594-4561D6721159}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1CF58C01-3E98-4122-8A63-51D1E07BA994}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1CF58C01-3E98-4122-8A63-51D1E07BA994}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1CF58C01-3E98-4122-8A63-51D1E07BA994}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1CF58C01-3E98-4122-8A63-51D1E07BA994}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C179FD6A-B6C9-4A7F-9594-4561D6721159}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C179FD6A-B6C9-4A7F-9594-4561D6721159}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C179FD6A-B6C9-4A7F-9594-4561D6721159}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C179FD6A-B6C9-4A7F-9594-4561D6721159}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E495C98F-601C-4315-A858-E1EA6640058A}
+		SolutionGuid = {080CDB0B-6F92-4A35-975F-8AD657BA2324}
 	EndGlobalSection
 EndGlobal
