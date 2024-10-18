@@ -1,22 +1,51 @@
-# Application Config and DI 🎍🎪🎢🎭🧶
+# Using session 🎍🎪🎢🎭🧶
+
+## Install these sessions
+
+```bash
+dotnet add package Microsoft.AspNetCore.Session
+dotnet add package Microsoft.Extensions.Caching.Memory
+dotnet add package Microsoft.Extensions.Caching.SqlServer
+```
 
 ```cs
 using System.Text;
-using static System.Console;
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
-app.MapGet("/ShowOptions", async (context) =>
+var builder = WebApplication.CreateBuilder(args);
+var servive = builder.Services;
+
+servive.AddDistributedMemoryCache();
+servive.AddDistributedSqlServerCache((option) =>
 {
-  var configuration = context.RequestServices.GetService<IConfiguration>();
-  var testOption = configuration.GetSection("TestOptions").Get<Testoptions>();
-  var opt_key = testOption.opt_key1;
-  var opt_key21 = testOption.opt_key2.k1;
-  var opt_key22 = testOption.opt_key2.k2;
-  var content = new StringBuilder();
-  content.Append("\nOption: " + opt_key + " " + opt_key21 + " " + opt_key22 + " ");
-  await context.Response.WriteAsync(content.ToString());
+  option.ConnectionString = "Data Source=192.168.1.110, 1433; Initial Catalog=webdb; TrustServerCertificate=True; UID = SA; PWD = Password123";
+  option.SchemaName = "dbo";
+  option.TableName = "Session";
 });
+servive.AddSession((option) =>
+{
+  option.Cookie.Name = "mtoan";
+  option.IdleTimeout = new TimeSpan(0, 30, 0);
+  //                            hour, minute, seconds
+});
+var app = builder.Build();
+app.UseSession(); // Session middleware
+app.MapGet("/readwritesession", async (context) =>
+{
+  int? count;
+  count = context.Session.GetInt32("count");
+  if (count == null) count = 0;
+  count += 1;
+  context.Session.SetInt32("count", count.Value);
+  await context.Response.WriteAsync("So lan truy cap : " + count);
+});
+app.MapGet("/", async (context) =>
+{
+  context.Response.ContentType = "text/plain; charset=utf-8";
+  await context.Response.WriteAsync("Trang web trống");
+});
+
 app.Run();
+/*
+dotnet sql-cache create "Data Source=192.168.1.110, 1433; Initial Catalog=webdb; TrustServerCertificate=True; UID = SA; PWD = Password123" dbo Session;
+*/
 ```

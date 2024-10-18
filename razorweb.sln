@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "razorweb", "razorweb.csproj", "{C179FD6A-B6C9-4A7F-9594-4561D6721159}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "razorweb", "razorweb.csproj", "{CE9AD145-DABD-48FD-BDEE-593E52171987}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C179FD6A-B6C9-4A7F-9594-4561D6721159}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C179FD6A-B6C9-4A7F-9594-4561D6721159}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C179FD6A-B6C9-4A7F-9594-4561D6721159}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C179FD6A-B6C9-4A7F-9594-4561D6721159}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE9AD145-DABD-48FD-BDEE-593E52171987}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE9AD145-DABD-48FD-BDEE-593E52171987}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE9AD145-DABD-48FD-BDEE-593E52171987}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE9AD145-DABD-48FD-BDEE-593E52171987}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {080CDB0B-6F92-4A35-975F-8AD657BA2324}
+		SolutionGuid = {0DBF473D-2738-424C-AF41-B13E9C53E52F}
 	EndGlobalSection
 EndGlobal
