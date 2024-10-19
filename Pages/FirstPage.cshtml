@@ -2,6 +2,9 @@
 @{
   ViewData["data"] = "Đây là trang razor page đầu tiên Su dung viewdata";
 }
+@{
+  ViewData["Title"] = "Trang Dau tien";
+}
 <h1>@ViewData["data"]</h1>
 <p>Học lập trình ASP.NET <strong>@System.DateTime.Now</strong></p>
 @{
@@ -11,6 +14,17 @@
   var lap = Int32.Parse(solan.ToString());
   <p>Số lần lập là: @lap</p>
 }
+@functions{
+  /*
+    OnGet, OnPost() -> These things call Handler
+  */
+
+  // Access by GET method
+  public void OnGet(){
+    ViewData["second"]="Đã call OnGet";
+  }
+}
+<h1 style="color: red;">@ViewData["second"]</h1>
 <ol>
   @for(int i=1; i<=lap; i++){
     <li>Lap @i</li>
