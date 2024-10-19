@@ -24,3 +24,5 @@ D:\razorweb\obj\Debug\net8.0\refint\razorweb.dll
 D:\razorweb\obj\Debug\net8.0\razorweb.pdb
 D:\razorweb\obj\Debug\net8.0\razorweb.genruntimeconfig.cache
 D:\razorweb\obj\Debug\net8.0\ref\razorweb.dll
+D:\razorweb\obj\Debug\net8.0\razorweb.RazorAssemblyInfo.cache
+D:\razorweb\obj\Debug\net8.0\razorweb.RazorAssemblyInfo.cs

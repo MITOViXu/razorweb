@@ -1,0 +1,18 @@
+@page "/trang1/{solan:int?}"
+@{
+  ViewData["data"] = "Đây là trang razor page đầu tiên Su dung viewdata";
+}
+<h1>@ViewData["data"]</h1>
+<p>Học lập trình ASP.NET <strong>@System.DateTime.Now</strong></p>
+@{
+  var a = 2;
+  int b = 3;
+  var solan = this.Request.RouteValues["solan"]??"0";
+  var lap = Int32.Parse(solan.ToString());
+  <p>Số lần lập là: @lap</p>
+}
+<ol>
+  @for(int i=1; i<=lap; i++){
+    <li>Lap @i</li>
+  }
+</ol>
