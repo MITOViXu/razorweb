@@ -1,26 +1,25 @@
 var builder = WebApplication.CreateBuilder(args);
-var service = builder.Services;
-service.AddRazorPages().AddRazorPagesOptions(option =>
-{
-    // Change Razor site storage directory
-    option.RootDirectory = "/Pages";
-    // Change site address to anohter name
-    option.Conventions.AddPageRoute("/FirstPage", "trangdau.html");
-});
-service.Configure<RouteOptions>(route =>
-{
-    route.LowercaseUrls = true;
-});
+
+// Add services to the container.
+builder.Services.AddRazorPages();
+
 var app = builder.Build();
 
-app.MapRazorPages();
-// FirstPage 
-app.MapGet("/", () => "Hello World!");
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
 
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.MapRazorPages();
 
 app.Run();
-
-/*
-    Razor page (.cshtml) = html + c#
-    Enginge Razor -> bien dich cshtml -> Response
-*/

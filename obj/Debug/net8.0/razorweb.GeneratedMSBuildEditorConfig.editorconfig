@@ -18,48 +18,32 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\razorweb
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/razorweb/Areas/Product/Pages/index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUHJvZHVjdFxQYWdlc1xpbmRleC5jc2h0bWw=
+[D:/razorweb/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/razorweb/Areas/Product/Pages/Sanphammoi.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUHJvZHVjdFxQYWdlc1xTYW5waGFtbW9pLmNzaHRtbA==
+[D:/razorweb/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/razorweb/Areas/User/Pages/index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxQYWdlc1xpbmRleC5jc2h0bWw=
+[D:/razorweb/Pages/Post1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9zdDEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/razorweb/Areas/User/Pages/Login.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxQYWdlc1xMb2dpbi5jc2h0bWw=
+[D:/razorweb/Pages/Post2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9zdDIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/razorweb/Pages/Dichvu/Dichvu1.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGljaHZ1XERpY2h2dTEuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/razorweb/Pages/Dichvu/Dichvu2.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGljaHZ1XERpY2h2dTIuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/razorweb/Pages/Dichvu/index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGljaHZ1XGluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/razorweb/Pages/FirstPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmlyc3RQYWdlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/razorweb/Pages/SecondPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2Vjb25kUGFnZS5jc2h0bWw=
+[D:/razorweb/Pages/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/razorweb/Pages/Shared/_MyLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9NeUxheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/razorweb/Pages/ThirdPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGhpcmRQYWdlLmNzaHRtbA==
+[D:/razorweb/Pages/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/razorweb/Pages/_ViewImports.cshtml]
@@ -69,3 +53,7 @@ build_metadata.AdditionalFiles.CssScope =
 [D:/razorweb/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
+
+[D:/razorweb/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-z4wizn8hnr
