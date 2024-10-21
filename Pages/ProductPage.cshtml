@@ -1,0 +1,27 @@
+﻿@page "/product/{id:int?}"
+@model razorweb.Pages.ProductPageModel
+@{
+  var product = Model.product;
+  var products = Model._productService.AllProduct();
+}
+<h1>@ViewData["Title"]</h1>
+
+@{
+  if(product != null){
+    <h2>Tên sản phẩm: @product.Name</h2>
+    <h2>Mô tả: @product.Description</h2>
+    <h2>Giá: @product.Price đồng</h2>
+    <p>
+      <a asp-page="ProductPage" asp-route-id="">Danh sách các sản phẩm</a>
+    </p>
+  } 
+  else{
+    <ul>
+    @foreach(var p in products){
+      <li><a asp-page="ProductPage" asp-route-id="@p.Id">@p.Name</a></li>
+    }
+    </ul>
+  }
+}
+<hr>
+<p><a class="btn btn-primary" asp-page="ProductPage" asp-route-handler="lastproduct">Sản phẩm cuối</a></p>

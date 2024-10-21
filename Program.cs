@@ -2,6 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddSingleton<ProductService>();
 
 var app = builder.Build();
 
@@ -23,3 +24,10 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
+
+/**
+
+    PageModel, Model Binding
+    - ProductPage
+    dotnet new page -n ProductPage -o Pages -na  razorweb.Pages
+*/

@@ -1,11 +1,3 @@
-D:\razorweb\obj\Debug\net8.0\razorweb.GeneratedMSBuildEditorConfig.editorconfig
-D:\razorweb\obj\Debug\net8.0\razorweb.AssemblyInfoInputs.cache
-D:\razorweb\obj\Debug\net8.0\razorweb.AssemblyInfo.cs
-D:\razorweb\obj\Debug\net8.0\razorweb.csproj.CoreCompileInputs.cache
-D:\razorweb\obj\Debug\net8.0\razorweb.MvcApplicationPartsAssemblyInfo.cache
-D:\razorweb\obj\Debug\net8.0\razorweb.RazorAssemblyInfo.cache
-D:\razorweb\obj\Debug\net8.0\razorweb.RazorAssemblyInfo.cs
-D:\razorweb\obj\Debug\net8.0\razorweb.sourcelink.json
 D:\razorweb\bin\Debug\net8.0\appsettings.Development.json
 D:\razorweb\bin\Debug\net8.0\appsettings.json
 D:\razorweb\bin\Debug\net8.0\razorweb.staticwebassets.runtime.json
@@ -14,6 +6,14 @@ D:\razorweb\bin\Debug\net8.0\razorweb.deps.json
 D:\razorweb\bin\Debug\net8.0\razorweb.runtimeconfig.json
 D:\razorweb\bin\Debug\net8.0\razorweb.dll
 D:\razorweb\bin\Debug\net8.0\razorweb.pdb
+D:\razorweb\obj\Debug\net8.0\razorweb.GeneratedMSBuildEditorConfig.editorconfig
+D:\razorweb\obj\Debug\net8.0\razorweb.AssemblyInfoInputs.cache
+D:\razorweb\obj\Debug\net8.0\razorweb.AssemblyInfo.cs
+D:\razorweb\obj\Debug\net8.0\razorweb.csproj.CoreCompileInputs.cache
+D:\razorweb\obj\Debug\net8.0\razorweb.MvcApplicationPartsAssemblyInfo.cache
+D:\razorweb\obj\Debug\net8.0\razorweb.RazorAssemblyInfo.cache
+D:\razorweb\obj\Debug\net8.0\razorweb.RazorAssemblyInfo.cs
+D:\razorweb\obj\Debug\net8.0\razorweb.sourcelink.json
 D:\razorweb\obj\Debug\net8.0\staticwebassets.build.json
 D:\razorweb\obj\Debug\net8.0\staticwebassets.development.json
 D:\razorweb\obj\Debug\net8.0\staticwebassets\msbuild.razorweb.Microsoft.AspNetCore.StaticWebAssets.props
