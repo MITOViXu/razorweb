@@ -24,10 +24,3 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
-
-/**
-
-    PageModel, Model Binding
-    - ProductPage
-    dotnet new page -n ProductPage -o Pages -na  razorweb.Pages
-*/

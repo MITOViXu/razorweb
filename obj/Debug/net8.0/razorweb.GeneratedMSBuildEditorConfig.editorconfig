@@ -18,10 +18,6 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\razorweb
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/razorweb/Pages/ContactRequest.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29udGFjdFJlcXVlc3QuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/razorweb/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

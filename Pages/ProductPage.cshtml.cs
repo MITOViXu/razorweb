@@ -14,9 +14,13 @@ namespace razorweb.Pages
             _logger = logger;
             _productService = productService;
         }
-        public void OnGet(int? id)
+        public void OnGet(int? id, Product sanpham)
         {
-            if (id != null)
+            // var data = this.Request.Form["id"];
+            // var data = this.Request.Query["id"];
+            // var data = this.Request.Headers["id"];
+            var data = this.Request.RouteValues["id"];
+            if (data != null)
             {
                 ViewData["Title"] = $"Sản phẩm có id = {id.Value}";
                 product = _productService.Find(id.Value);
@@ -29,8 +33,8 @@ namespace razorweb.Pages
         // /product/{id:int?}?handler=lastproduct
         public void OnGetLastProduct()
         {
-            ViewData["Title"]= "Sản phẩm cuối";
-             product = _productService.AllProduct().LastOrDefault() ?? (new Product()
+            ViewData["Title"] = "Sản phẩm cuối";
+            product = _productService.AllProduct().LastOrDefault() ?? (new Product()
             {
                 Id = 0,
                 Name = "",
