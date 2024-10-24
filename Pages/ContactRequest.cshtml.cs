@@ -14,6 +14,7 @@ namespace razorweb.Pages
         public ContactRequestModel(ILogger<ContactRequestModel> logger)
         {
             _logger = logger;
+            userContact = new UserContact();
             WriteLine("Init Contact...");
         }
         public int Tong(int a, int b)

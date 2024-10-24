@@ -32,6 +32,7 @@
 <div class="alert alert-danger">
   Welcome <span style="font-weight: bold;">@Model.userContact.UserID</span> to Website
 </div>
+@if(@Model.userContact != null){
 <div class="alert alert">
   <p>Thông tin User</p>
   <ul>
@@ -40,6 +41,7 @@
     <li>USerName: @Model.userContact.UserName</li>
   </ul>
 </div>
+}
 @section Scripts{
   <partial name="_ValidationScriptsPartial" />
 }
