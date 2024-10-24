@@ -245,6 +245,14 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "D:\\razorweb\\wwwroot\\uploads\\Capture.PNG",
+      "PackagePath": "staticwebassets\\uploads\\Capture.PNG"
+    },
+    {
+      "Id": "D:\\razorweb\\wwwroot\\uploads\\shanghai.jpg",
+      "PackagePath": "staticwebassets\\uploads\\shanghai.jpg"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.razorweb.props",
       "PackagePath": "build\\razorweb.props"
     },
