@@ -18,8 +18,8 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\razorweb
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/razorweb/Pages/ContactRequest.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29udGFjdFJlcXVlc3QuY3NodG1s
+[D:/razorweb/Pages/Contact.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29udGFjdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/razorweb/Pages/Error.cshtml]
@@ -32,10 +32,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/razorweb/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/razorweb/Pages/ProductPage.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHVjdFBhZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/razorweb/Pages/Shared/_ValidationScriptsPartial.cshtml]
