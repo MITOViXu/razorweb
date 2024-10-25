@@ -1,0 +1,67 @@
+@page
+@model razorweb.Pages_Blog.IndexModel
+
+@{
+    ViewData["Title"] = "Các bài viết";
+}
+
+@{
+    // xây dựng Func phát sinh Url từ page ./Index
+    Func<int?, string> generateUrl = (int? _pagenumber) => {
+        return Url.Page("/Blog/Index", new { p = _pagenumber });
+    };
+
+    var datapaging = new PagingModel{
+        currentPage = Model.currentPage,    // trang hiện tại
+        countPages  = Model.countPages,   // tổng  số trang 
+        generateUrl =  generateUrl
+    };
+
+}
+<partial name="_Paging" model="@datapaging" />
+
+<h1>Trang chinh sua</h1>
+
+<form  method="get" asp-page="./Index">
+    <label >Tim kiem</label>
+    <input  name="SearchString" />
+    <button type="submit" >Tìm</button>
+</form>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Article[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Article[0].Created)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Article[0].Content)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Article) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
