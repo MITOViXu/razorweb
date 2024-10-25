@@ -1,147 +1,95 @@
-# Validation, ModelBinder and UploadFile 🎍🎪🎢🎭🧶
+# Integrate EF into ASP.NET core 🎍🎪🎢🎭🧶
 
-## Create your own Validation
+## Install these packages
 
-```cs
-[Display(Name = "Năm sinh")]
-[Required]
-[SoChan]
-public int? YearOfBirth { get; set; }
+```bash
+dotnet tool install --global dotnet-ef
+dotnet tool install --global dotnet-aspnet-codegenerator
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
-**SoChan.cs**
+## Using Bogus for generate fake data
+
+```
+dotnet add package Bogus --version 35.6.1
+```
+
+**When added migration, add the code bellow**
+
+_20241025041707_initdb.cs_
 
 ```cs
-using System.ComponentModel.DataAnnotations;
+using System;
+using Bogus;
+using Microsoft.EntityFrameworkCore.Migrations;
 
-public class SoChan : ValidationAttribute
+#nullable disable
+
+namespace razorweb.Migrations
 {
-  public SoChan() => ErrorMessage = "{0} phai la so chan";
-  public override bool IsValid(object value)
-  {
-    if (value == null) return false;
-    int i = int.Parse(value.ToString());
-    return i % 2 == 0;
-  }
-}
-```
-
-## Create your own Binder property
-
-```cs
-  [Display(Name = "Tên khách hàng")]
-  [Required(ErrorMessage = "Phai nhap {0}")]
-  [ModelBinder(BinderType = typeof(UserNameBinding))]
-
-  // Working the same way
-  // [DisplayName("Tên khách hàng")]
-  public string CustomerName { get; set; }
-```
-
-**UserNameBind.cs**
-
-```cs
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-
-/**
-  -
-*/
-public class UserNameBinding : IModelBinder
-{
-  public Task BindModelAsync(ModelBindingContext bindingContext)
-  {
-    if (bindingContext == null)
+    /// <inheritdoc />
+    public partial class initdb : Migration
     {
-      throw new ArgumentException("bindingContext");
-    }
-    string modelName = bindingContext.ModelName;
-
-    var valueProviderResult = bindingContext.ValueProvider.GetValue(modelName);
-    if (valueProviderResult == ValueProviderResult.None) return Task.CompletedTask;
-    string value = valueProviderResult.FirstValue;
-    if (string.IsNullOrEmpty(value)) return Task.CompletedTask;
-    //
-    string s = value.ToUpper();
-    if (s.Contains("XXX"))
-    {
-      bindingContext.ModelState.SetModelValue(modelName, valueProviderResult);
-      bindingContext.ModelState.TryAddModelError(modelName, "Lỗi do chứa XXX");
-      return Task.CompletedTask;
-    }
-    s = s.Trim();
-    bindingContext.ModelState.SetModelValue(modelName, s, s);
-    bindingContext.Result = ModelBindingResult.Success(s);
-
-    return Task.CompletedTask;
-
-  }
-}
-```
-
-## File Upload
-
-```cs
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-
-namespace razorweb.Pages
-{
-    public class ContactModel : PageModel
-    {
-        [BindProperty]
-        public CustomerInfo customerInfo { get; set; }
-        private readonly ILogger<ContactModel> _logger;
-        [BindProperty]
-        [DataType(DataType.Upload)]
-        [Required(ErrorMessage = "Chon file Upload")]
-        [DisplayName("File Upload")]
-        public IFormFile FileUpload { get; set; }
-        [BindProperty]
-        [DataType(DataType.Upload)]
-        // [FileExtensions(Extensions = "jpg,png,gif")]
-        [Required(ErrorMessage = "Chon file Upload")]
-        [DisplayName("Nhieu Files Upload")]
-
-        public IFormFile[] FileUploads { get; set; }
-
-
-        private readonly IWebHostEnvironment _webHostEnvironment;
-        public ContactModel(ILogger<ContactModel> logger, IWebHostEnvironment webHostEnvironment)
+        /// <inheritdoc />
+        protected override void Up(MigrationBuilder migrationBuilder)
         {
-            _logger = logger;
-            _webHostEnvironment = webHostEnvironment;
-            customerInfo = new CustomerInfo();
-            Console.WriteLine("_Init contact");
-        }
-        public string thongbao { get; set; }
-        public void OnPost()
-        {
-            if (ModelState.IsValid)
-            {
-                thongbao = "Dữ liệu gửi đến phù hợp";
-                Console.WriteLine("Form is valid.");
-
-                if (FileUpload != null)
+            migrationBuilder.CreateTable(
+                name: "articles",
+                columns: table => new
                 {
-                    var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", FileUpload.FileName);
-                    using var fileStream = new FileStream(filePath, FileMode.OpenOrCreate);
-                    FileUpload.CopyTo(fileStream);
-                }
-                foreach(var f in FileUploads){
-                    var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", f.FileName);
-                    using var fileStream = new FileStream(filePath, FileMode.OpenOrCreate);
-                    f.CopyTo(fileStream);
-                }
-            }
-            else
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Content = table.Column<string>(type: "ntext", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_articles", x => x.Id);
+                });
+
+            // Insert data
+            // Fake data - Bogus
+            //Set the randomizer seed if you wish to generate repeatable data sets.
+            Randomizer.Seed = new Random(8675309);
+            var faker = new Faker<Article>();
+            faker.RuleFor(a => a.Title, f => f.Lorem.Sentence(5, 5));
+            faker.RuleFor(a => a.Created, f => f.Date.Between(new DateTime(2024, 1, 1), new DateTime(2024, 7, 30)));
+            faker.RuleFor(a => a.Content, f => f.Lorem.Paragraphs(1, 4));
+
+            for (int i = 0; i < 150; i++)
             {
-                thongbao = "Dữ liệu gửi đến KHÔNG phù hợp";
-                Console.WriteLine("Form is invalid.");
+                Article article = faker.Generate();
+                migrationBuilder.InsertData(
+                    table: "articles",
+                    columns: new[] { "Title", "Created", "Content" },
+                    values: new object[] {
+                        article.Title,
+                        article.Created,
+                        article.Content
+                    }
+                );
             }
+
+            // migrationBuilder.InsertData(
+            //     table: "articles",
+            //     columns: new[] {"Title", "Created", "Content"},
+            //     values: new object[] {
+            //         "Bai viet 2",
+            //         new DateTime(2024,8,21),
+            //         "Noi dung 2"
+            //     }
+            // );
         }
 
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "articles");
+        }
     }
 }
 
