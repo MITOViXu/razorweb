@@ -1,6 +1,7 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-public class MyBlogContext : DbContext
+public class MyBlogContext : IdentityDbContext<AppUser>
 {
   public MyBlogContext(DbContextOptions<MyBlogContext> options) : base(options)
   {
@@ -11,11 +12,11 @@ public class MyBlogContext : DbContext
   {
     base.OnConfiguring(optionsBuilder);
   }
-
+  
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     base.OnModelCreating(modelBuilder);
   }
-  
+
   public DbSet<Article> articles { get; set; }
 }

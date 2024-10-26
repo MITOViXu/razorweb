@@ -1,9 +1,14 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<MyBlogContext>()
+                .AddDefaultTokenProviders();
 builder.Services.AddDbContext<MyBlogContext>(options =>
 {
     string connectString = builder.Configuration.GetConnectionString("MyBlogContext");
@@ -20,11 +25,13 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+IdentityUser user;
+IdentityDbContext context;
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
