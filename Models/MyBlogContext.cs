@@ -12,10 +12,18 @@ public class MyBlogContext : IdentityDbContext<AppUser>
   {
     base.OnConfiguring(optionsBuilder);
   }
-  
+
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     base.OnModelCreating(modelBuilder);
+    foreach (var entity in modelBuilder.Model.GetEntityTypes())
+    {
+      var tablenams = entity.GetTableName();
+      if (tablenams.StartsWith("AspNet"))
+      {
+        entity.SetTableName(tablenams.Substring(6));
+      }
+    }
   }
 
   public DbSet<Article> articles { get; set; }

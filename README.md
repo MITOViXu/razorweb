@@ -36,3 +36,11 @@ dotnet aspnet-codegenerator razorpage -m Article -dc MyBlogContext -outDir Pages
 - Authentication: Identify -> login - logout.  
 - Authorization: Access permission.  
 - User 
+
+## Access to Login
+/Identity/Account/Login
+
+## Generate code for Identity
+```bash
+dotnet aspnet-codegenerator identity -dc MyBlogContext
+```

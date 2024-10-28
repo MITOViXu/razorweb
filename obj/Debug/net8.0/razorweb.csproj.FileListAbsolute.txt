@@ -8,7 +8,18 @@ D:\razorweb\bin\Debug\net8.0\razorweb.dll
 D:\razorweb\bin\Debug\net8.0\razorweb.pdb
 D:\razorweb\bin\Debug\net8.0\Azure.Core.dll
 D:\razorweb\bin\Debug\net8.0\Azure.Identity.dll
+D:\razorweb\bin\Debug\net8.0\Bogus.dll
+D:\razorweb\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
 D:\razorweb\bin\Debug\net8.0\Humanizer.dll
+D:\razorweb\bin\Debug\net8.0\MailKit.dll
+D:\razorweb\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.Facebook.dll
+D:\razorweb\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.Google.dll
+D:\razorweb\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\razorweb\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.MicrosoftAccount.dll
+D:\razorweb\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
+D:\razorweb\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.Twitter.dll
+D:\razorweb\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\razorweb\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.UI.dll
 D:\razorweb\bin\Debug\net8.0\Microsoft.AspNetCore.Razor.Language.dll
 D:\razorweb\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 D:\razorweb\bin\Debug\net8.0\Microsoft.Build.dll
@@ -32,11 +43,14 @@ D:\razorweb\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
 D:\razorweb\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
 D:\razorweb\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 D:\razorweb\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+D:\razorweb\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
 D:\razorweb\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
 D:\razorweb\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 D:\razorweb\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
 D:\razorweb\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
 D:\razorweb\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\razorweb\bin\Debug\net8.0\Microsoft.Extensions.Logging.Configuration.dll
+D:\razorweb\bin\Debug\net8.0\Microsoft.Extensions.Logging.Console.dll
 D:\razorweb\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 D:\razorweb\bin\Debug\net8.0\Microsoft.Identity.Client.dll
 D:\razorweb\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
@@ -56,6 +70,7 @@ D:\razorweb\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGeneration.Templatin
 D:\razorweb\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 D:\razorweb\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
 D:\razorweb\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+D:\razorweb\bin\Debug\net8.0\MimeKit.dll
 D:\razorweb\bin\Debug\net8.0\Mono.TextTemplating.dll
 D:\razorweb\bin\Debug\net8.0\Newtonsoft.Json.dll
 D:\razorweb\bin\Debug\net8.0\NuGet.Common.dll
@@ -74,6 +89,7 @@ D:\razorweb\bin\Debug\net8.0\System.Composition.Hosting.dll
 D:\razorweb\bin\Debug\net8.0\System.Composition.Runtime.dll
 D:\razorweb\bin\Debug\net8.0\System.Composition.TypedParts.dll
 D:\razorweb\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
+D:\razorweb\bin\Debug\net8.0\System.Data.SqlClient.dll
 D:\razorweb\bin\Debug\net8.0\System.Drawing.Common.dll
 D:\razorweb\bin\Debug\net8.0\System.Formats.Asn1.dll
 D:\razorweb\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
@@ -229,6 +245,11 @@ D:\razorweb\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.
 D:\razorweb\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 D:\razorweb\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 D:\razorweb\bin\Debug\net8.0\runtimes\win\lib\net7.0\Microsoft.Win32.SystemEvents.dll
+D:\razorweb\bin\Debug\net8.0\runtimes\win-arm64\native\sni.dll
+D:\razorweb\bin\Debug\net8.0\runtimes\win-x64\native\sni.dll
+D:\razorweb\bin\Debug\net8.0\runtimes\win-x86\native\sni.dll
+D:\razorweb\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\razorweb\bin\Debug\net8.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\razorweb\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 D:\razorweb\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 D:\razorweb\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
@@ -238,6 +259,7 @@ D:\razorweb\obj\Debug\net8.0\razorweb.GeneratedMSBuildEditorConfig.editorconfig
 D:\razorweb\obj\Debug\net8.0\razorweb.AssemblyInfoInputs.cache
 D:\razorweb\obj\Debug\net8.0\razorweb.AssemblyInfo.cs
 D:\razorweb\obj\Debug\net8.0\razorweb.csproj.CoreCompileInputs.cache
+D:\razorweb\obj\Debug\net8.0\razorweb.MvcApplicationPartsAssemblyInfo.cs
 D:\razorweb\obj\Debug\net8.0\razorweb.MvcApplicationPartsAssemblyInfo.cache
 D:\razorweb\obj\Debug\net8.0\razorweb.RazorAssemblyInfo.cache
 D:\razorweb\obj\Debug\net8.0\razorweb.RazorAssemblyInfo.cs
@@ -258,4 +280,3 @@ D:\razorweb\obj\Debug\net8.0\refint\razorweb.dll
 D:\razorweb\obj\Debug\net8.0\razorweb.pdb
 D:\razorweb\obj\Debug\net8.0\razorweb.genruntimeconfig.cache
 D:\razorweb\obj\Debug\net8.0\ref\razorweb.dll
-D:\razorweb\bin\Debug\net8.0\Bogus.dll
